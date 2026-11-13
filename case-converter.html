@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Case Converter – WordCounterPro</title>
-<meta name="description" content="Convert text to UPPERCASE, lowercase, Title Case, Sentence case, and Capitalized Case instantly.">
+<title>Free Case Converter: Uppercase, Lowercase, Title Case – WordCounterPro</title>
+<meta name="description" content="Convert text to UPPERCASE, lowercase, Title Case, or Sentence case in one click. Free, private, and runs in your browser.">
+<link rel="canonical" href="https://www.YOURDOMAIN.com/case-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Case Converter: Uppercase, Lowercase, Title Case – WordCounterPro">
+<meta property="og:description" content="Convert text to UPPERCASE, lowercase, Title Case, or Sentence case in one click. Free, private, and runs in your browser.">
+<meta property="og:url" content="https://www.YOURDOMAIN.com/case-converter.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
@@ -22,10 +27,19 @@ textarea{width:100%;min-height:260px;padding:16px;font:18px/1.6 "Newsreader",ser
 button{padding:10px 18px;border:0;background:var(--accent);color:var(--on-accent);font-weight:600;border-radius:6px;cursor:pointer}
 button:hover{opacity:0.9}
 footer{background:var(--nav);color:var(--on-nav);text-align:center;padding:20px;margin-top:60px;font-size:14px}
+.card + .card{margin-top:24px}
+.info h2{font:600 26px "Newsreader",serif;margin:0 0 10px}
+.info h3{font:600 17px "Instrument Sans",sans-serif;margin:18px 0 4px}
+.info p,.info li{max-width:72ch}.info ol,.info ul{padding-left:22px}.info li{margin:6px 0}
+.info a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+.info table{border-collapse:collapse;width:100%;margin:12px 0;font-size:15px}
+.info th,.info td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}.info th{background:var(--bg)}
+.navlinks{display:flex;gap:18px;flex-wrap:wrap}.navlinks a{color:inherit;text-decoration:none;font-weight:500}
+footer a{color:inherit}.fl{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin-bottom:8px}
 </style>
 </head>
 <body>
-<nav><div><a class="logo" href="index.html">WordCounter<b>Pro</b></a><a href="index.html" style="color:inherit;text-decoration:none;font-weight:500;">« Back to Main Counter</a></div></nav>
+<nav><div><a class="logo" href="index.html">WordCounter<b>Pro</b></a><span class="navlinks"><a href="index.html">« Back to Main Counter</a><a href="index.html#more-tools">Tools</a><a href="index.html#blog">Blog</a></span></div></nav>
 <main class="wrap">
 <div class="card">
   <h1>Case Converter Tool</h1>
@@ -39,13 +53,78 @@ footer{background:var(--nav);color:var(--on-nav);text-align:center;padding:20px;
     <button onclick="copyText()" style="background:var(--ink);color:var(--bg);margin-left:auto;">Copy Text</button>
   </div>
 </div>
+
+<section class="card info">
+  <h2>How to Use the Case Converter</h2>
+  <p>The Case Converter changes the capitalization of your text in one click. Use it to fix a paragraph typed with Caps Lock on, format a heading, or make text from different sources consistent. The conversion happens in your browser, and the text you enter is not sent to our servers.</p>
+  <ol>
+    <li><strong>Add your text.</strong> Type or paste it into the box above.</li>
+    <li><strong>Click a case button.</strong> Choose UPPERCASE, lowercase, Title Case or Sentence case. The text in the box is replaced right away.</li>
+    <li><strong>Check the result.</strong> There is no undo button, so keep a copy of your original text if you might want it back.</li>
+    <li><strong>Copy it.</strong> Click Copy Text to put the converted text on your clipboard, then paste it where you need it.</li>
+  </ol>
+</section>
+
+<section class="card info">
+  <h2>What Each Option Does</h2>
+  <table>
+    <thead><tr><th>Button</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>UPPERCASE</td><td>Every letter becomes a capital letter.</td></tr>
+      <tr><td>lowercase</td><td>Every letter becomes a small letter.</td></tr>
+      <tr><td>Title Case</td><td>Converts everything to lowercase first, then capitalizes the first letter of every word, including short words such as "and," "of" and "the." Each part of a hyphenated word is capitalized too.</td></tr>
+      <tr><td>Sentence case</td><td>Converts everything to lowercase first, then capitalizes the first letter of the text and of each sentence that follows a period, question mark or exclamation mark.</td></tr>
+    </tbody>
+  </table>
+  <h3>Things to check after converting</h3>
+  <ul>
+    <li><strong>Small words in titles.</strong> Style guides such as AP, APA and Chicago keep short words like "a," "the" and "of" lowercase. This tool capitalizes every word, so adjust those by hand if your style guide requires it.</li>
+    <li><strong>Names and acronyms.</strong> Sentence case lowercases everything before capitalizing sentence starts, so names, places, acronyms such as NASA, and the word "I" will need to be recapitalized.</li>
+    <li><strong>Language rules.</strong> The tool works with letters from many alphabets, but it doesn't apply language-specific casing rules.</li>
+  </ul>
+</section>
+
+<section class="card info">
+  <h2>When to Use a Case Converter</h2>
+  <ul>
+    <li><strong>Fixing Caps Lock mistakes.</strong> Turn a block of accidental capitals into normal sentences with one click.</li>
+    <li><strong>Formatting headings.</strong> Convert a draft headline to Title Case or Sentence case to match your publication's style.</li>
+    <li><strong>Cleaning up data.</strong> Make names, product titles or list entries copied from different places consistent.</li>
+    <li><strong>Removing shouting.</strong> Convert an all-caps message to lowercase or Sentence case before sharing it.</li>
+  </ul>
+</section>
+
+<section class="card info">
+  <h2>Frequently Asked Questions</h2>
+  <h3>What is the difference between Title Case and Sentence case?</h3>
+<p>Title Case capitalizes the first letter of every word, as in a headline. Sentence case capitalizes only the first word of each sentence, as in normal writing.</p>
+<h3>Does Title Case capitalize words like "and" and "the"?</h3>
+<p>Yes. This tool capitalizes every word. If your style guide keeps small words lowercase, change them manually after converting.</p>
+<h3>Can I undo a conversion?</h3>
+<p>There is no undo button on this page. Copy your original text somewhere before converting if you want to keep it.</p>
+<h3>Is my text uploaded or stored?</h3>
+<p>No. The conversion runs in your browser, and this page doesn't send your text to our servers or save it.</p>
+<h3>Why did names and acronyms turn lowercase after Sentence case?</h3>
+<p>The tool lowercases all text first and then capitalizes sentence starts, so anything that should be capitalized mid-sentence, such as names and acronyms, needs to be fixed by hand.</p>
+<h3>Does it work with languages other than English?</h3>
+<p>It works with letters from many alphabets, but it doesn't apply special casing rules that some languages have. Check the result if you convert non-English text.</p>
+
+</section>
+
+<section class="card info">
+  <h2>More Writing Tools</h2>
+  <ul><li><a href="text-cleaner.html">Text Cleaner</a> – remove extra spaces and blank lines</li><li><a href="goal-tracker.html">Goal Tracker</a> – track a word-count target</li><li><a href="voice-proofreader.html">Voice Proofreader</a> – hear your writing read aloud</li><li><a href="index.html">Main Word Counter</a> – words, characters, reading level and Flow Score</li><li><a href="index.html#blog">Writing Guides</a> – tips on word limits, readability and SEO</li></ul>
+</section>
 </main>
-<footer><p>© WordCounterPro. Contact: WordCounterPro@outlook.com</p></footer>
+<footer>
+  <div class="fl"><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a><a href="sitemap.html">Sitemap</a></div>
+  <p>© 2026 WordCounterPro. All rights reserved.</p>
+</footer>
 <script>
 const b=document.getElementById('box');
 function toUpper(){b.value=b.value.toUpperCase()}
 function toLower(){b.value=b.value.toLowerCase()}
-function toTitle(){b.value=b.value.toLowerCase().replace(/(^|[\s(“"'-])(\p{L})/gu,(m,a,c)=>a+c.toUpperCase())}
+function toTitle(){b.value=b.value.toLowerCase().replace(/(^|[\s(“"‘-])(\p{L})/gu,(m,a,c)=>a+c.toUpperCase())}
 function toSentence(){b.value=b.value.toLowerCase().replace(/(^\s*|[.!?]\s+)(\p{L})/gu,(m,a,c)=>a+c.toUpperCase())}
 function copyText(){navigator.clipboard.writeText(b.value);alert('Copied to clipboard!')}
 </script>

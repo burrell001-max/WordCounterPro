@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Goal Tracker – WordCounterPro</title>
-<meta name="description" content="Set real-time visual target goals for words, characters, and pages while writing.">
+<title>Writing Goal Tracker: Word Count Progress Bar – WordCounterPro</title>
+<meta name="description" content="Set a word-count goal and watch a live progress bar fill as you write. Free, private, and runs in your browser.">
+<link rel="canonical" href="https://www.YOURDOMAIN.com/goal-tracker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Writing Goal Tracker: Word Count Progress Bar – WordCounterPro">
+<meta property="og:description" content="Set a word-count goal and watch a live progress bar fill as you write. Free, private, and runs in your browser.">
+<meta property="og:url" content="https://www.YOURDOMAIN.com/goal-tracker.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
@@ -21,10 +26,19 @@ textarea{width:100%;min-height:260px;padding:16px;font:18px/1.6 "Newsreader",ser
 .track{height:14px;background:var(--line);border-radius:7px;overflow:hidden;margin:16px 0}.bar{height:100%;width:0;background:var(--accent);transition:width 0.2s}
 input{padding:8px;border:1px solid var(--line);border-radius:6px;width:120px;margin-right:12px}
 footer{background:var(--nav);color:var(--on-nav);text-align:center;padding:20px;margin-top:60px;font-size:14px}
+.card + .card{margin-top:24px}
+.info h2{font:600 26px "Newsreader",serif;margin:0 0 10px}
+.info h3{font:600 17px "Instrument Sans",sans-serif;margin:18px 0 4px}
+.info p,.info li{max-width:72ch}.info ol,.info ul{padding-left:22px}.info li{margin:6px 0}
+.info a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+.info table{border-collapse:collapse;width:100%;margin:12px 0;font-size:15px}
+.info th,.info td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}.info th{background:var(--bg)}
+.navlinks{display:flex;gap:18px;flex-wrap:wrap}.navlinks a{color:inherit;text-decoration:none;font-weight:500}
+footer a{color:inherit}.fl{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin-bottom:8px}
 </style>
 </head>
 <body>
-<nav><div><a class="logo" href="index.html">WordCounter<b>Pro</b></a><a href="index.html" style="color:inherit;text-decoration:none;font-weight:500;">« Back to Main Counter</a></div></nav>
+<nav><div><a class="logo" href="index.html">WordCounter<b>Pro</b></a><span class="navlinks"><a href="index.html">« Back to Main Counter</a><a href="index.html#more-tools">Tools</a><a href="index.html#blog">Blog</a></span></div></nav>
 <main class="wrap">
 <div class="card">
   <h1>Writing Goal Tracker</h1>
@@ -36,11 +50,70 @@ footer{background:var(--nav);color:var(--on-nav);text-align:center;padding:20px;
   <div class="track"><div class="bar" id="bar"></div></div>
   <textarea id="box" placeholder="Start writing to track your goal progress live..." oninput="update()"></textarea>
 </div>
+
+<section class="card info">
+  <h2>How to Use the Writing Goal Tracker</h2>
+  <p>The Goal Tracker turns a word count into a target you can see. Set the number of words you want to write, then watch the progress bar fill as you type. It runs in your browser and doesn't send your text to our servers.</p>
+  <ol>
+    <li><strong>Enter your Word Target.</strong> The default is 500. Use a number above zero.</li>
+    <li><strong>Start writing or paste your text.</strong> The status line updates live, showing your words, your target, and the percentage complete.</li>
+    <li><strong>Watch the bar.</strong> When it is full, you have reached your goal. If you keep writing, the word count keeps rising, but the percentage stops at 100%.</li>
+    <li><strong>Copy your work before you leave.</strong> This page doesn't save your text or your target, so refreshing or closing it clears everything. For auto-saved documents, use the <a href="index.html">main editor</a>.</li>
+  </ol>
+</section>
+
+<section class="card info">
+  <h2>How Words Are Counted</h2>
+  <p>The Goal Tracker counts words the same way as the main WordCounterPro counter. A word starts with a letter or number and can include apostrophes and hyphens, so "don't" and "well-known" each count as one word. Other punctuation ends a word, so a number such as 3.5 or a web address is counted as several words.</p>
+  <p>Other programs may count differently, so if you are working to a strict limit set by a school, publisher or employer, check how that organization counts.</p>
+</section>
+
+<section class="card info">
+  <h2>Choosing a Word Target</h2>
+  <ul>
+    <li><strong>250 words:</strong> a gentle daily habit, about one short paragraph or two.</li>
+    <li><strong>500 words:</strong> a steady daily goal, or one blog post section.</li>
+    <li><strong>1,000 words:</strong> a serious daily goal for experienced writers.</li>
+    <li><strong>1,667 words:</strong> the daily pace needed to write a 50,000-word novel draft in 30 days.</li>
+    <li><strong>An assignment limit:</strong> enter your required length, and use the guides below to split it by section.</li>
+  </ul>
+  <h3>Tips</h3>
+  <ul>
+    <li><strong>Start smaller than you think.</strong> A goal you meet every day beats a big one you skip.</li>
+    <li><strong>Set a goal per section.</strong> Our guide to <a href="blog-improving-academic-essays.html">structuring academic essays</a> shows how to budget words across an essay.</li>
+    <li><strong>Use it as a limit.</strong> If you have a maximum, enter it as the target. A full bar means you have reached it, so check the number in the status line to see whether you have gone over.</li>
+  </ul>
+</section>
+
+<section class="card info">
+  <h2>Frequently Asked Questions</h2>
+  <h3>Does the Goal Tracker save my progress?</h3>
+<p>No. Your text and target are not saved on this page, so copy your work before closing or refreshing it. The main editor can auto-save your documents in your browser.</p>
+<h3>Does it track characters or pages?</h3>
+<p>No, this tool tracks words only. The main word counter shows characters, sentences, paragraphs and more.</p>
+<h3>Why is my count different from another tool?</h3>
+<p>Tools follow different counting rules, especially for hyphenated words, contractions, numbers and symbols. Check which rule your school or publisher uses.</p>
+<h3>What happens if I go over my target?</h3>
+<p>The bar stays full and the percentage stays at 100%, but the word count in the status line keeps rising, so you can see how far over you are.</p>
+<h3>What if I leave the target empty or set it to zero?</h3>
+<p>The tracker treats it as a target of 1, so the bar will fill as soon as you write a word. Enter a number above zero for a useful goal.</p>
+<h3>Is my text uploaded?</h3>
+<p>No. The count happens in your browser, and this page doesn't send your text to our servers.</p>
+
+</section>
+
+<section class="card info">
+  <h2>More Writing Tools and Guides</h2>
+  <ul><li><a href="index.html">Main Word Counter</a> – words, characters, reading level, Flow Score and saved documents</li><li><a href="case-converter.html">Case Converter</a> – change capitalization</li><li><a href="text-cleaner.html">Text Cleaner</a> – remove extra spaces and blank lines</li><li><a href="voice-proofreader.html">Voice Proofreader</a> – hear your writing read aloud</li><li><a href="blog-cutting-word-limits.html">Cutting a Draft to a Strict Word Limit</a> – when you're over your target</li><li><a href="blog-ideal-blog-post-length-seo.html">How Long Should a Blog Post Be for SEO?</a> – choosing a target length</li></ul>
+</section>
 </main>
-<footer><p>© WordCounterPro. Contact: WordCounterPro@outlook.com</p></footer>
+<footer>
+  <div class="fl"><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a><a href="sitemap.html">Sitemap</a></div>
+  <p>© 2026 WordCounterPro. All rights reserved.</p>
+</footer>
 <script>
 function update(){
-  const w=(document.getElementById('box').value.match(/[\p{L}\p{N}]+/gu)||[]).length;
+  const w=(document.getElementById('box').value.match(/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu)||[]).length;
   const target=parseInt(document.getElementById('target').value)||1;
   const pct=Math.min(100,(w/target)*100);
   document.getElementById('bar').style.width=pct+'%';

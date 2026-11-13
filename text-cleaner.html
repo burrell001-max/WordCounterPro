@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Text Cleaner – WordCounterPro</title>
-<meta name="description" content="Clean your formatted text by removing double spaces, tab spaces, line breaks, and trailing spaces.">
+<title>Free Text Cleaner: Remove Extra Spaces and Blank Lines – WordCounterPro</title>
+<meta name="description" content="Clean pasted text by removing extra spaces and tabs, collapsing blank lines, and trimming line edges. Free and private.">
+<link rel="canonical" href="https://www.YOURDOMAIN.com/text-cleaner.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Text Cleaner: Remove Extra Spaces and Blank Lines – WordCounterPro">
+<meta property="og:description" content="Clean pasted text by removing extra spaces and tabs, collapsing blank lines, and trimming line edges. Free and private.">
+<meta property="og:url" content="https://www.YOURDOMAIN.com/text-cleaner.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
@@ -22,10 +27,19 @@ textarea{width:100%;min-height:260px;padding:16px;font:18px/1.6 "Newsreader",ser
 button{padding:10px 18px;border:0;background:var(--accent);color:var(--on-accent);font-weight:600;border-radius:6px;cursor:pointer}
 button:hover{opacity:0.9}
 footer{background:var(--nav);color:var(--on-nav);text-align:center;padding:20px;margin-top:60px;font-size:14px}
+.card + .card{margin-top:24px}
+.info h2{font:600 26px "Newsreader",serif;margin:0 0 10px}
+.info h3{font:600 17px "Instrument Sans",sans-serif;margin:18px 0 4px}
+.info p,.info li{max-width:72ch}.info ol,.info ul{padding-left:22px}.info li{margin:6px 0}
+.info a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+.info table{border-collapse:collapse;width:100%;margin:12px 0;font-size:15px}
+.info th,.info td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}.info th{background:var(--bg)}
+.navlinks{display:flex;gap:18px;flex-wrap:wrap}.navlinks a{color:inherit;text-decoration:none;font-weight:500}
+footer a{color:inherit}.fl{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin-bottom:8px}
 </style>
 </head>
 <body>
-<nav><div><a class="logo" href="index.html">WordCounter<b>Pro</b></a><a href="index.html" style="color:inherit;text-decoration:none;font-weight:500;">« Back to Main Counter</a></div></nav>
+<nav><div><a class="logo" href="index.html">WordCounter<b>Pro</b></a><span class="navlinks"><a href="index.html">« Back to Main Counter</a><a href="index.html#more-tools">Tools</a><a href="index.html#blog">Blog</a></span></div></nav>
 <main class="wrap">
 <div class="card">
   <h1>Text Cleaner Tool</h1>
@@ -38,8 +52,72 @@ footer{background:var(--nav);color:var(--on-nav);text-align:center;padding:20px;
     <button onclick="copyText()" style="background:var(--ink);color:var(--bg);margin-left:auto;">Copy Text</button>
   </div>
 </div>
+
+<section class="card info">
+  <h2>How to Use the Text Cleaner</h2>
+  <p>Text copied from PDFs, emails, web pages and old documents often arrives with extra spaces, stray tabs and big gaps between paragraphs. The Text Cleaner tidies that up in one click. It only changes whitespace and never alters your words, and it runs in your browser, so your text is not sent to our servers.</p>
+  <ol>
+    <li><strong>Paste your text</strong> into the box above.</li>
+    <li><strong>Choose a button.</strong> Use Remove Extra Spaces, Remove Blank Lines, or Clean Everything to do both and more.</li>
+    <li><strong>Review the result.</strong> There is no undo button, so keep a copy of the original if you might need it.</li>
+    <li><strong>Click Copy Text</strong> to copy the cleaned text to your clipboard.</li>
+  </ol>
+</section>
+
+<section class="card info">
+  <h2>What Each Button Does</h2>
+  <table>
+    <thead><tr><th>Button</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>Remove Extra Spaces</td><td>Replaces every run of spaces or tabs with a single space. For example, two spaces after a period become one, and a tab becomes one space. Line breaks are not touched.</td></tr>
+      <tr><td>Remove Blank Lines</td><td>Shrinks any run of blank lines down to a single blank line. Your paragraphs stay separated, but large gaps disappear. It does not delete the single blank line between paragraphs.</td></tr>
+      <tr><td>Clean Everything</td><td>Does both of the above, then removes spaces at the start and end of every line, including indentation.</td></tr>
+    </tbody>
+  </table>
+  <h3>What it does not do</h3>
+  <ul>
+    <li><strong>It doesn't join broken lines.</strong> If your text was copied from a PDF with a line break at the end of every line, those breaks remain inside paragraphs.</li>
+    <li><strong>It may not catch every invisible character.</strong> Special characters such as non-breaking spaces in the middle of a line can survive cleaning.</li>
+    <li><strong>It doesn't change your words.</strong> It doesn't fix spelling, grammar or punctuation.</li>
+  </ul>
+</section>
+
+<section class="card info">
+  <h2>When to Clean Your Text</h2>
+  <ul>
+    <li><strong>After copying from a PDF or email.</strong> These sources often add spacing you can't see until you paste the text somewhere else.</li>
+    <li><strong>Before submitting a form or application.</strong> Extra spaces can cause entries to look wrong or be rejected.</li>
+    <li><strong>Before checking a character limit.</strong> Spaces count as characters on most platforms, so cleaning can lower your total. Paste the result into the <a href="index.html">main word counter</a>, which shows characters with and without spaces.</li>
+    <li><strong>Before importing text into another tool.</strong> Spreadsheets, databases and content systems handle clean text more reliably.</li>
+  </ul>
+</section>
+
+<section class="card info">
+  <h2>Frequently Asked Questions</h2>
+  <h3>Does the Text Cleaner change my words?</h3>
+<p>No. It only changes spaces, tabs, blank lines and spacing at the edges of lines. Your words and punctuation stay the same.</p>
+<h3>Why are some of my line breaks still there?</h3>
+<p>The tool reduces runs of blank lines but doesn't remove line breaks inside a paragraph. If every line of your pasted text ends with a break, you'll need to join those lines yourself.</p>
+<h3>Will cleaning change my word count?</h3>
+<p>Your word count stays the same because no words change, but your character count may drop because extra spaces are removed.</p>
+<h3>Does it remove bold, italics or links?</h3>
+<p>The box holds plain text, so pasting into it already drops formatting such as bold, italics and links. Only the text itself remains.</p>
+<h3>Can I undo the cleaning?</h3>
+<p>There is no undo button on this page. Copy your original text before cleaning if you want to keep it.</p>
+<h3>Is my text uploaded or saved?</h3>
+<p>No. Cleaning happens in your browser, and this page doesn't send your text to our servers or save it.</p>
+
+</section>
+
+<section class="card info">
+  <h2>More Writing Tools</h2>
+  <ul><li><a href="case-converter.html">Case Converter</a> – change text to uppercase, lowercase, Title Case or Sentence case</li><li><a href="goal-tracker.html">Goal Tracker</a> – track a word-count target</li><li><a href="voice-proofreader.html">Voice Proofreader</a> – hear your writing read aloud</li><li><a href="index.html">Main Word Counter</a> – words, characters, reading level and Flow Score</li><li><a href="blog-cutting-word-limits.html">Cutting a Draft to a Strict Word Limit</a> – a guide to trimming text</li></ul>
+</section>
 </main>
-<footer><p>© WordCounterPro. Contact: WordCounterPro@outlook.com</p></footer>
+<footer>
+  <div class="fl"><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a><a href="sitemap.html">Sitemap</a></div>
+  <p>© 2026 WordCounterPro. All rights reserved.</p>
+</footer>
 <script>
 const b=document.getElementById('box');
 function cleanSpaces(){b.value=b.value.replace(/[ \t]+/g,' ')}

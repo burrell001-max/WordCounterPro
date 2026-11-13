@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Voice Proofreader – WordCounterPro</title>
-<meta name="description" content="Listen back to your writing using browser voice speech synthesis to catch typos and grammatical mistakes.">
+<title>Voice Proofreader: Listen to Your Writing Read Aloud – WordCounterPro</title>
+<meta name="description" content="Listen to your writing read aloud with your browser's built-in voice to catch typos, repeated words, and awkward phrasing.">
+<link rel="canonical" href="https://www.YOURDOMAIN.com/voice-proofreader.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Voice Proofreader: Listen to Your Writing Read Aloud – WordCounterPro">
+<meta property="og:description" content="Listen to your writing read aloud with your browser's built-in voice to catch typos, repeated words, and awkward phrasing.">
+<meta property="og:url" content="https://www.YOURDOMAIN.com/voice-proofreader.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
@@ -22,10 +27,19 @@ textarea{width:100%;min-height:260px;padding:16px;font:18px/1.6 "Newsreader",ser
 button{padding:10px 18px;border:0;background:var(--accent);color:var(--on-accent);font-weight:600;border-radius:6px;cursor:pointer}
 button:hover{opacity:0.9}
 footer{background:var(--nav);color:var(--on-nav);text-align:center;padding:20px;margin-top:60px;font-size:14px}
+.card + .card{margin-top:24px}
+.info h2{font:600 26px "Newsreader",serif;margin:0 0 10px}
+.info h3{font:600 17px "Instrument Sans",sans-serif;margin:18px 0 4px}
+.info p,.info li{max-width:72ch}.info ol,.info ul{padding-left:22px}.info li{margin:6px 0}
+.info a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+.info table{border-collapse:collapse;width:100%;margin:12px 0;font-size:15px}
+.info th,.info td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}.info th{background:var(--bg)}
+.navlinks{display:flex;gap:18px;flex-wrap:wrap}.navlinks a{color:inherit;text-decoration:none;font-weight:500}
+footer a{color:inherit}.fl{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin-bottom:8px}
 </style>
 </head>
 <body>
-<nav><div><a class="logo" href="index.html">WordCounter<b>Pro</b></a><a href="index.html" style="color:inherit;text-decoration:none;font-weight:500;">« Back to Main Counter</a></div></nav>
+<nav><div><a class="logo" href="index.html">WordCounter<b>Pro</b></a><span class="navlinks"><a href="index.html">« Back to Main Counter</a><a href="index.html#more-tools">Tools</a><a href="index.html#blog">Blog</a></span></div></nav>
 <main class="wrap">
 <div class="card">
   <h1>Voice Proofreader Tool</h1>
@@ -38,8 +52,70 @@ footer{background:var(--nav);color:var(--on-nav);text-align:center;padding:20px;
     </label>
   </div>
 </div>
+
+<section class="card info">
+  <h2>How to Use the Voice Proofreader</h2>
+  <p>Your ear catches problems your eyes skip. When you read silently, your brain fills in missing words and smooths over clumsy sentences. When you hear the text out loud, those problems stand out. The Voice Proofreader reads your draft aloud using your browser's built-in speech voice.</p>
+  <ol>
+    <li><strong>Paste or type your text</strong> into the box above.</li>
+    <li><strong>Set the speed</strong> with the slider, from 0.5 (slow) to 2 (fast). The speed is applied when reading starts, so stop and start again to change it.</li>
+    <li><strong>Click Start Reading Aloud.</strong> Follow along on screen while you listen.</li>
+    <li><strong>Click Stop Reading</strong> whenever you want to pause and fix something, then start again after editing.</li>
+  </ol>
+</section>
+
+<section class="card info">
+  <h2>What to Listen For</h2>
+  <ul>
+    <li><strong>Missing or repeated words.</strong> Doubled words like "the the" and dropped words are easy to hear and easy to miss on the page.</li>
+    <li><strong>Run-on sentences.</strong> If you would run out of breath before the sentence ends, it is probably too long. Split it.</li>
+    <li><strong>Awkward rhythm.</strong> A passage that sounds flat or choppy may need sentences of different lengths. Our guide to <a href="blog-sentence-flow-rhythm.html">using Flow Score to fix monotone writing</a> shows how.</li>
+    <li><strong>Repeated words and phrases.</strong> Using the same word three times in a few lines becomes obvious when spoken.</li>
+    <li><strong>Garbled words.</strong> A typo is often mispronounced, which makes it easy to spot.</li>
+  </ul>
+  <h3>What listening won't catch</h3>
+  <p>Words that sound alike, such as "their," "there" and "they're," are pronounced identically, so you can't hear the difference. Check those by eye. The voice also reads exactly what is written, so it won't tell you whether your grammar or facts are correct.</p>
+</section>
+
+<section class="card info">
+  <h2>Tips for Better Proofreading</h2>
+  <ul>
+    <li><strong>Slow down.</strong> A speed of about 0.8 to 0.9 makes mistakes easier to notice.</li>
+    <li><strong>Work in sections.</strong> For long drafts, paste in a few paragraphs at a time. Some browsers stop reading very long text partway through.</li>
+    <li><strong>Watch the screen.</strong> Follow along with your eyes while you listen. You are matching what you hear to what is written.</li>
+    <li><strong>Expect odd pronunciations.</strong> Numbers, abbreviations, acronyms and unusual names may be read strangely. That doesn't mean your text is wrong.</li>
+    <li><strong>Read it yourself too.</strong> Reading aloud in your own voice works well for catching rhythm problems, and the tool is a good second pass.</li>
+  </ul>
+  <h3>Browser and privacy notes</h3>
+  <p>The tool uses the speech voice built into your browser and device, so the sound and quality depend on them. If nothing plays, check your volume, try another browser, or make sure your device has a text-to-speech voice installed. Some browsers use online voices, in which case the text may be processed by the browser maker's speech service. For sensitive text, use a browser or voice that works offline. Our <a href="privacy.html">Privacy Policy</a> has more details.</p>
+</section>
+
+<section class="card info">
+  <h2>Frequently Asked Questions</h2>
+  <h3>Does the Voice Proofreader check grammar or spelling?</h3>
+<p>No. It only reads your text aloud. It doesn't correct, highlight or flag anything, so you do the listening.</p>
+<h3>Can I change the voice?</h3>
+<p>Not on this page. It uses your browser's default voice. You can usually change that in your device or browser speech settings.</p>
+<h3>Can I change the speed while it is reading?</h3>
+<p>The speed is set when reading starts. To change it, click Stop Reading, adjust the slider, and start again.</p>
+<h3>Why isn't anything playing?</h3>
+<p>Make sure the text box isn't empty, your volume is up, and your device has a text-to-speech voice. If it still doesn't work, try a different browser.</p>
+<h3>Is my text sent anywhere?</h3>
+<p>This page doesn't send your text to our servers. However, depending on your browser and the voice it uses, the text may be handled by the browser's speech service.</p>
+<h3>How much text can it read at once?</h3>
+<p>That depends on your browser. If reading stops early on a long draft, try pasting it in smaller sections.</p>
+
+</section>
+
+<section class="card info">
+  <h2>More Writing Tools and Guides</h2>
+  <ul><li><a href="index.html">Main Word Counter</a> – includes a Read Aloud feature, voice typing and Flow Score</li><li><a href="text-cleaner.html">Text Cleaner</a> – remove extra spaces and blank lines</li><li><a href="case-converter.html">Case Converter</a> – change capitalization</li><li><a href="goal-tracker.html">Goal Tracker</a> – track a word-count target</li><li><a href="blog-speech-writing-timing.html">Speech Writing: Timing and Word Counts</a> – write and time a speech</li><li><a href="blog-improving-academic-essays.html">Structuring Academic Essays and Research Papers</a> – revise in layers</li></ul>
+</section>
 </main>
-<footer><p>© WordCounterPro. Contact: WordCounterPro@outlook.com</p></footer>
+<footer>
+  <div class="fl"><a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a><a href="sitemap.html">Sitemap</a></div>
+  <p>© 2026 WordCounterPro. All rights reserved.</p>
+</footer>
 <script>
 const b=document.getElementById('box'),btn=document.getElementById('playBtn'),rate=document.getElementById('rate');
 let playing=false;
