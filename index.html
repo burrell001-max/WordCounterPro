@@ -20,8 +20,8 @@
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Instrument Sans",system-ui,sans-serif}
 a{color:inherit}
 nav{background:var(--nav);color:var(--on-nav)}
-nav div{max-width:1120px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
-.logo{font:600 26px/1 "Newsreader",Georgia,serif;text-decoration:none;margin-right:auto}
+nav>div{max-width:1120px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.logo{display:grid;gap:3px;font:600 26px/1 "Newsreader",Georgia,serif;text-decoration:none;margin-right:auto}.logo small{font:500 11px "Instrument Sans",sans-serif;letter-spacing:.04em;opacity:.8}
 .logo b{background:var(--accent);color:var(--on-accent);padding:2px 7px;border-radius:5px;margin-left:3px;font-weight:600}
 nav a:not(.logo){text-decoration:none;opacity:.85;font-size:15px}nav a:not(.logo):hover{opacity:1;text-decoration:underline}
 .wrap{max-width:1120px;margin:0 auto;padding:22px 20px 40px}
@@ -80,6 +80,28 @@ dialog input{font:inherit;padding:8px 10px;width:100%;border:1px solid var(--lin
 .bars i{display:block;background:var(--accent);border-radius:4px 4px 0 0;margin-bottom:4px;min-height:2px}
 body.basic aside,body.basic article,body.basic .top{display:none}body.basic .layout{grid-template-columns:1fr}body.basic textarea{min-height:68vh}
 @media (max-width:860px){.layout{grid-template-columns:1fr}textarea{min-height:280px}.top h1{font-size:34px}}
+
+nav .menu>button{color:var(--on-nav);font-size:15px;opacity:.85;padding:0}nav .menu>button:hover{background:none;border-color:transparent;opacity:1;text-decoration:underline}
+.menu li a{display:block;padding:7px 10px;color:var(--ink);border-radius:6px;opacity:1!important;white-space:nowrap}.menu li a:hover{background:var(--bg);text-decoration:none!important}
+.how{display:block;text-align:center;color:var(--accent);filter:brightness(.8);font-weight:500;text-decoration:none}.how:hover{text-decoration:underline}
+.tip{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--line);color:var(--muted);font:600 11px sans-serif;margin-left:6px;position:relative;cursor:help}
+.tip::after{content:attr(data-tip);display:none;position:absolute;bottom:130%;left:50%;transform:translateX(-50%);width:210px;padding:7px 9px;background:var(--ink);color:var(--bg);border-radius:6px;font:400 12px/1.4 "Instrument Sans",sans-serif;z-index:6;text-align:left}
+.tip:hover::after,.tip:focus::after{display:block}
+.link{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.share{display:flex;gap:5px}.share a{display:grid;place-items:center;width:28px;height:28px;border-radius:6px;background:var(--ink);color:var(--bg);font:700 13px sans-serif;text-decoration:none}.share a:hover{background:var(--accent);color:var(--on-accent)}
+.box h2.fl{display:flex;align-items:center;gap:8px}
+.new{background:var(--accent);color:var(--on-accent);font:700 11px "Instrument Sans",sans-serif;padding:2px 7px;border-radius:10px}
+.sw{margin-left:auto;position:relative;width:44px;height:24px}.sw input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;width:100%;height:100%}
+.sw i{position:absolute;inset:0;border-radius:12px;background:var(--line);pointer-events:none;transition:.15s}
+.sw i::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.15s}
+.sw input:checked+i{background:var(--accent)}.sw input:checked+i::after{transform:translateX(20px)}.sw input:focus-visible+i{outline:3px solid var(--accent);outline-offset:2px}
+.fscore{display:flex;align-items:baseline;gap:10px;padding:12px 16px 4px}.fscore b{font:600 38px/1 "Newsreader",serif}.fscore span{color:var(--muted);font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;padding:4px 16px 8px;font-size:12px;color:var(--muted)}
+.fview{margin:0 16px 16px;max-height:260px;overflow:auto;font:400 15px/1.7 "Newsreader",Georgia,serif}
+.f0{background:rgba(74,144,226,.3)}.f1{background:rgba(46,170,110,.25)}.f2{background:rgba(242,169,0,.38)}.rp{text-decoration:underline wavy #d33;text-underline-offset:3px}
+.legend .f0,.legend .f1,.legend .f2{padding:0 6px;border-radius:3px}
+.post{margin:14px 0}.sitemap{margin:0;padding:0 0 0 18px;list-style:disc;display:block}.sitemap li{display:list-item;margin:3px 0}
+footer .fl{max-width:none}footer .fl a{display:inline;padding:0 6px}
 </style>
 </head>
 <body>
@@ -97,8 +119,10 @@ body.basic aside,body.basic article,body.basic .top{display:none}body.basic .lay
 </svg>
 
 <nav><div>
-  <a class="logo" href="#top">WordCounter<b>Pro</b></a>
-  <a href="#top">Counter</a><a href="#about">How it works</a><a href="#privacy">Privacy</a>
+  <a class="logo" href="#top"><span>WordCounter<b>Pro</b></span><small>Every Word Counts</small></a>
+  <a href="#top">Home</a><a href="#blog">Blog</a>
+  <div class="menu" id="moremenu"><button id="morenav" aria-haspopup="true">More ▾</button>
+    <ul><li><a href="#how">How it works</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#terms">Terms of use</a></li><li><a href="#sitemap">Sitemap</a></li><li><a href="#aboutus">About us</a></li></ul></div>
 </div></nav>
 
 <main class="wrap" id="top">
@@ -133,15 +157,16 @@ body.basic aside,body.basic article,body.basic .top{display:none}body.basic .lay
 </section>
 
 <aside aria-live="polite">
+  <a class="how" href="#how">How it works »</a>
   <div class="card box">
     <h2>Details</h2>
     <div class="row">Words<span class="pill" id="w">0</span></div>
     <div class="row">Characters<span class="pill" id="c">0</span></div>
     <div class="row">Sentences<span class="pill" id="s">0</span></div>
     <div class="row">Paragraphs<span class="pill" id="p">0</span></div>
-    <div class="row">Reading level<span class="pill" id="lvl">N/A</span></div>
-    <div class="row">Reading time<span class="pill" id="rt">0 sec</span></div>
-    <div class="row">Speaking time<span class="pill" id="st">0 sec</span></div>
+    <div class="row"><span>Reading level<span class="tip" tabindex="0" role="note" aria-label="Estimated U.S. school grade needed to follow the text (Flesch–Kincaid)." data-tip="Estimated U.S. school grade needed to follow the text (Flesch–Kincaid).">?</span></span><span class="pill" id="lvl">N/A</span></div>
+    <div class="row"><span>Reading time<span class="tip" tabindex="0" role="note" aria-label="Based on an average silent reading speed of 238 words per minute." data-tip="Based on an average silent reading speed of 238 words per minute.">?</span></span><span class="pill" id="rt">0 sec</span></div>
+    <div class="row"><span>Speaking time<span class="tip" tabindex="0" role="note" aria-label="Based on an average speaking pace of 150 words per minute." data-tip="Based on an average speaking pace of 150 words per minute.">?</span></span><span class="pill" id="st">0 sec</span></div>
     <div class="more" id="more">
       <div class="row">Characters, no spaces<span class="pill" id="cn">0</span></div>
       <div class="row">Unique words<span class="pill" id="uq">0</span></div>
@@ -149,18 +174,32 @@ body.basic aside,body.basic article,body.basic .top{display:none}body.basic .lay
       <div class="row">Words per sentence<span class="pill" id="wps">0</span></div>
       <div class="row">Longest word<span class="pill" id="lw">–</span></div>
       <div class="row">Lines<span class="pill" id="ln">0</span></div>
+      <div class="row">Syllables<span class="pill" id="sy">0</span></div>
+      <div class="row">Longest sentence<span class="pill" id="lsent">0</span></div>
+      <div class="row">Shortest sentence<span class="pill" id="ssent">0</span></div>
+      <div class="row">Sentences per paragraph<span class="pill" id="spp">0</span></div>
+      <div class="row">Numbers<span class="pill" id="nums">0</span></div>
+      <div class="row">Pages (about 500 words)<span class="pill" id="pg">0</span></div>
     </div>
-    <div class="link"><button id="morebtn">Show more details</button></div>
+    <div class="link"><button id="morebtn">More (12)</button>
+      <span class="share"><a data-sh="fb" aria-label="Share on Facebook" target="_blank" rel="noopener">f</a><a data-sh="x" aria-label="Share on X" target="_blank" rel="noopener">X</a><a data-sh="li" aria-label="Share on LinkedIn" target="_blank" rel="noopener">in</a><a data-sh="rd" aria-label="Share on Reddit" target="_blank" rel="noopener">r</a><a data-sh="em" aria-label="Share by email">✉</a></span></div>
+  </div>
+  <div class="card box">
+    <h2 class="fl">Flow Score <span class="new">NEW</span><span class="tip" tabindex="0" role="note" aria-label="Rates how much your sentence lengths vary. Even, same-sized sentences read as monotonous." data-tip="Rates how much your sentence lengths vary. Even, same-sized sentences read as monotonous.">?</span><label class="sw"><input type="checkbox" id="flowsw" aria-label="Turn Flow Score on"><i></i></label></h2>
+    <p class="empty" id="flowoff" style="text-align:center">Improve your writing's flow and variety using sentence highlights.</p>
+    <div id="flowon" hidden><div class="fscore"><b id="fs">–</b><span id="fsl"></span></div>
+      <div class="legend"><span class="f0">short (1–8)</span><span class="f1">medium (9–20)</span><span class="f2">long (21+)</span><span class="rp">3+ alike in a row</span></div>
+      <div class="fview" id="fview"></div></div>
   </div>
   <div class="card box">
     <h2>Keyword density</h2>
-    <div class="seg" role="group" aria-label="Phrase length"><button class="on" data-n="1">1 word</button><button data-n="2">2 words</button><button data-n="3">3 words</button></div>
+    <div class="seg" role="group" aria-label="Phrase length"><button class="on" data-n="1" aria-label="1 word">x1</button><button data-n="2" aria-label="2 words">x2</button><button data-n="3" aria-label="3 words">x3</button></div>
     <ol id="kw"></ol><p class="empty" id="kwe">Start typing to see your most-used words.</p>
   </div>
 </aside>
 </div>
 
-<article class="card" id="about">
+<article class="card" id="how">
   <h2>What is WordCounterPro?</h2>
   <p>WordCounterPro is a free writing tool that updates your word, character, sentence and paragraph counts while you type. Paste a draft in, trim it to a limit, and watch the numbers move.</p>
   <h3>Hit a target</h3>
@@ -170,11 +209,38 @@ body.basic aside,body.basic article,body.basic .top{display:none}body.basic .lay
   <h3 id="privacy">Your text stays with you</h3>
   <p>Nothing you type is sent to a server. Auto-save keeps a copy in this browser only, and you can turn it off or clear it at any time. Reading level is an estimate based on the Flesch–Kincaid grade formula, so treat it as a guide.</p>
 </article>
+
+<article class="card" id="blog">
+  <h2>Blog</h2>
+  <div class="post"><h3>Cutting a draft to a word limit</h3>
+  <p>Start with the Details panel: note your count, then remove filler openings, doubled adjectives and sentences that repeat a point. Check keyword density last to catch words you leaned on too often.</p></div>
+  <div class="post"><h3>Using Flow Score to fix monotone writing</h3>
+  <p>Turn on Flow Score and look for runs of three or more sentences of similar length. Splitting one long sentence or joining two short ones usually makes the rhythm feel less mechanical.</p></div>
+</article>
+
+<article class="card" id="terms">
+  <h2>Terms of use</h2>
+  <p>WordCounterPro is provided free and as is, with no warranty. Counts, reading level, reading time and Flow Score are estimates and may differ from other tools. You are responsible for the text you write and for any decisions you make based on these numbers.</p>
+</article>
+
+<article class="card" id="sitemap">
+  <h2>Sitemap</h2>
+  <ul class="sitemap"><li><a href="#top">Home – the counter</a></li><li><a href="#how">How it works</a></li><li><a href="#blog">Blog</a></li><li><a href="#terms">Terms of use</a></li><li><a href="#privacy">Privacy policy</a></li><li><a href="#aboutus">About us</a></li></ul>
+</article>
+
+<article class="card" id="aboutus">
+  <h2>About us</h2>
+  <p>WordCounterPro is a small, independent writing tool built to do one thing well: show you the numbers behind your text while you type. It is free, has no accounts and shows no ads.</p>
+  <h3>Our approach</h3>
+  <p>Everything runs in your browser. Your writing is never uploaded, and the site is a single page of plain HTML, CSS and JavaScript hosted on GitHub Pages, so there is little to break and nothing hidden.</p>
+  <h3>What it can and can't do</h3>
+  <p>It counts, estimates and highlights. It does not check grammar, spelling or plagiarism, because those need outside services that would see your text.</p>
+</article>
 </main>
 
 <footer><div>
   <section><h4>WordCounterPro</h4><p>A simple, private word counter that runs entirely in your browser.</p></section>
-  <section><h4>Jump to</h4><a href="#top">Counter</a><a href="#about">How it works</a><a href="#privacy">Privacy</a></section>
+  <section><h4>Links</h4><span class="fl"><a href="#aboutus">about us</a> | <a href="#sitemap">sitemap</a> | <a href="#terms">terms of use</a> | <a href="#privacy">privacy policy</a></span></section>
 </div></footer>
 
 <dialog id="goald"><h2>Word goal</h2>
@@ -187,13 +253,14 @@ body.basic aside,body.basic article,body.basic .top{display:none}body.basic .lay
 const $=id=>document.getElementById(id),t=$('t');
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 const STOP=new Set('the a an and or but of to in on at for with is are was were be been it its this that as by from not i you he she we they them his her our your my me so if then than too very can will just'.split(' '));
+const WRE=/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu;
 const fmt=s=>{s=Math.round(s);return s<60?s+' sec':Math.floor(s/60)+' min'+(s%60?' '+s%60+' sec':'')};
 const syl=w=>{w=w.toLowerCase().replace(/[^a-z]/g,'');if(w.length<=3)return w?1:0;return Math.max(1,(w.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/,'').replace(/^y/,'').match(/[aeiouy]{1,2}/g)||[]).length)};
 let n=1,prev=0,autosave=store.get('wcp-auto')!=='0',goal=+store.get('wcp-goal')||0;
 
 function update(first){
   const v=t.value,w=v.match(/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu)||[],W=w.length;
-  const sents=(v.match(/[^.!?]+[.!?]+(?=\s|$)|[^.!?\s][^.!?]*$/g)||[]).filter(s=>/[\p{L}\p{N}]/u.test(s)).length;
+  const sa=(v.match(/[^.!?]+[.!?]+(?=\s|$)|[^.!?\s][^.!?]*$/g)||[]).filter(s=>/[\p{L}\p{N}]/u.test(s)).map(s=>s.trim()),sents=sa.length,sl=sa.map(s=>(s.match(WRE)||[]).length);
   const set=(id,x)=>$(id).textContent=typeof x==='number'?x.toLocaleString():x;
   set('hw',W);set('hc',v.length);set('w',W);set('c',v.length);set('s',sents);
   set('p',v.split(/\n/).filter(x=>x.trim()).length);
@@ -207,9 +274,27 @@ function update(first){
   set('wps',sents?(W/sents).toFixed(1):0);
   set('lw',w.reduce((a,b)=>b.length>a.length?b:a,'')||'–');
   set('ln',v?v.split('\n').length:0);
+  const pc=v.split(/\n/).filter(x=>x.trim()).length;
+  set('sy',w.reduce((a,x)=>a+syl(x),0));
+  set('lsent',sl.length?Math.max(...sl):0);set('ssent',sl.length?Math.min(...sl):0);
+  set('spp',pc?(sents/pc).toFixed(1):0);
+  set('nums',(v.match(/\d+(?:[.,]\d+)*/g)||[]).length);
+  set('pg',(W/500).toFixed(1));
+  flow(sa,sl);
   keywords(w);goalUI(W);
   if(!first){if(W>prev)addActivity(W-prev);if(autosave)store.set('wcp-text',v)}
   prev=W;
+}
+function flow(sa,sl){
+  const on=$('flowsw').checked;$('flowoff').hidden=on;$('flowon').hidden=!on;if(!on)return;
+  const b=sl.map(l=>l<=8?0:l<=20?1:2),rp=b.map(()=>false);
+  for(let i=0;i<b.length;){let j=i;while(j<b.length&&b[j]===b[i])j++;if(j-i>=3)for(let k=i;k<j;k++)rp[k]=true;i=j}
+  const N=sl.length;
+  if(N<3){$('fs').textContent='–';$('fsl').textContent='Write at least 3 sentences.'}
+  else{const m=sl.reduce((a,x)=>a+x,0)/N,sd=Math.sqrt(sl.reduce((a,x)=>a+(x-m)**2,0)/N);
+    const rr=rp.filter(Boolean).length,sc=Math.max(0,Math.min(100,Math.round(sd/m*200)-Math.round(40*rr/N)));
+    $('fs').textContent=sc;$('fsl').textContent=sc>=70?'Varied rhythm':sc>=40?'Fairly even rhythm':'Repetitive rhythm'}
+  $('fview').replaceChildren(...sa.flatMap((s,i)=>{const e=document.createElement('span');e.className='f'+b[i]+(rp[i]?' rp':'');e.textContent=s;return [e,document.createTextNode(' ')]}));
 }
 function keywords(w){
   const lw=w.map(x=>x.toLowerCase()),c={};
@@ -243,7 +328,13 @@ t.addEventListener('input',()=>update());
 $('paste').onclick=async()=>{try{insert(await navigator.clipboard.readText())}catch(e){t.focus();alert('Your browser blocked clipboard access. Press Ctrl+V (or Cmd+V) in the text box instead.')}};
 $('casebtn').onclick=()=>$('casemenu').classList.toggle('open');
 document.querySelectorAll('[data-case]').forEach(b=>b.onclick=()=>{$('casemenu').classList.remove('open');t.focus();const s=t.selectionStart!==t.selectionEnd;if(!s)t.select();const sel=t.value.slice(t.selectionStart,t.selectionEnd);insert(cases[b.dataset.case](sel))});
-document.addEventListener('click',e=>{if(!e.target.closest('#casemenu'))$('casemenu').classList.remove('open')});
+document.addEventListener('click',e=>{document.querySelectorAll('.menu.open').forEach(m=>{if(!m.contains(e.target))m.classList.remove('open')})});
+$('morenav').onclick=()=>$('moremenu').classList.toggle('open');
+$('moremenu').addEventListener('click',e=>{if(e.target.closest('a'))$('moremenu').classList.remove('open')});
+$('flowsw').onchange=()=>{store.set('wcp-flow',$('flowsw').checked?'1':'0');update(true)};
+const u=encodeURIComponent(location.href),ti=encodeURIComponent(document.title);
+const SH={fb:'https://www.facebook.com/sharer/sharer.php?u='+u,x:'https://twitter.com/intent/tweet?url='+u+'&text='+ti,li:'https://www.linkedin.com/sharing/share-offsite/?url='+u,rd:'https://www.reddit.com/submit?url='+u+'&title='+ti,em:'mailto:?subject='+ti+'&body='+u};
+document.querySelectorAll('[data-sh]').forEach(a=>a.href=SH[a.dataset.sh]);
 $('undo').onclick=()=>{t.focus();document.execCommand('undo');update()};
 $('redo').onclick=()=>{t.focus();document.execCommand('redo');update()};
 $('goalbtn').onclick=()=>{$('gin').value=goal||'';$('goald').showModal()};
@@ -255,10 +346,11 @@ $('autosave').onclick=()=>{autosave=!autosave;store.set('wcp-auto',autosave?'1':
 $('basic').onclick=()=>{const b=document.body.classList.toggle('basic');$('basic').lastChild.textContent=b?'Full view':'Go basic';store.set('wcp-basic',b?'1':'0')};
 $('dl').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t.value],{type:'text/plain'}));a.download='my-text.txt';a.click();URL.revokeObjectURL(a.href)};
 $('clear').onclick=()=>{if(t.value&&!confirm('Clear all text?'))return;t.value='';prev=0;update(true);store.set('wcp-text','');t.focus()};
-$('morebtn').onclick=()=>{const m=$('more');m.classList.toggle('show');$('morebtn').textContent=m.classList.contains('show')?'Show fewer details':'Show more details'};
+$('morebtn').onclick=()=>{const m=$('more');m.classList.toggle('show');$('morebtn').textContent=m.classList.contains('show')?'Fewer details':'More (12)'};
 document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{n=+b.dataset.n;document.querySelectorAll('.seg button').forEach(x=>x.classList.toggle('on',x===b));update(true)});
 
 if(autosave)t.value=store.get('wcp-text')||'';
+$('flowsw').checked=store.get('wcp-flow')==='1';
 autoUI();update(true);
 if(store.get('wcp-basic')==='1')$('basic').click();
 </script>
