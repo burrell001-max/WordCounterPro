@@ -132,6 +132,7 @@ footer .fl{max-width:none}footer .fl a{display:inline;padding:0 6px}
 </div>
 
 <div class="layout">
+<div>
 <section class="card" aria-label="Editor">
   <div class="tools" role="toolbar" aria-label="Editor tools">
     <button id="paste"><svg class="i"><use href="#paste"/></svg>Paste</button>
@@ -155,6 +156,16 @@ footer .fl{max-width:none}footer .fl a{display:inline;padding:0 6px}
     <div class="goalbar" id="goalbar"><span id="goaltxt"></span><div class="track"><i id="goalfill"></i></div></div>
   </div>
 </section>
+
+<article class="card" id="whatis">
+  <h2>What is WordCounterPro?</h2>
+  <p>Apart from counting words and characters, our online editor can help you to improve word choice and writing style, and, optionally, help you to detect grammar mistakes and plagiarism. To check word count, simply place your cursor into the text box above and start typing. You'll see the number of characters and words increase or decrease as you type, delete, and edit them. You can also copy and paste text from another program over into the online editor above. The Auto-Save feature will make sure you won't lose any changes while editing, even if you leave the site and come back later. Tip: Bookmark this page now.</p>
+  <p>Knowing the word count of a text can be important. For example, if an author has to write a minimum or maximum amount of words for an article, essay, report, story, book, paper, you name it. WordCounterPro will help to make sure its word count reaches a specific requirement or stays within a certain limit.</p>
+  <p>In addition, WordCounterPro shows you the top 10 keywords and keyword density of the article you're writing. This allows you to know which keywords you use how often and at what percentages. This can prevent you from over-using certain words or word combinations and check for best distribution of keywords in your writing.</p>
+  <p>In the Details overview you can see the average speaking and reading time for your text, while Reading Level is an indicator of the education level a person would need in order to understand the words you’re using.</p>
+  <p><small>Disclaimer: We strive to make our tools as accurate as possible but we cannot guarantee it will always be so.</small></p>
+</article>
+</div>
 
 <aside aria-live="polite">
   <a class="how" href="#how">How it works »</a>
@@ -200,7 +211,7 @@ footer .fl{max-width:none}footer .fl a{display:inline;padding:0 6px}
 </div>
 
 <article class="card" id="how">
-  <h2>What is WordCounterPro?</h2>
+  <h2>How it works</h2>
   <p>WordCounterPro is a free writing tool that updates your word, character, sentence and paragraph counts while you type. Paste a draft in, trim it to a limit, and watch the numbers move.</p>
   <h3>Hit a target</h3>
   <p>Set a word goal for an essay, article or post. The bar under the editor fills as you write, and Activity shows how many words you added each day this week.</p>
@@ -301,7 +312,7 @@ function keywords(w){
   for(let i=0;i+n<=lw.length;i++){const g=lw.slice(i,i+n);
     if(n===1?(g[0].length<3||STOP.has(g[0])):g.every(x=>STOP.has(x))||STOP.has(g[0])||STOP.has(g[n-1]))continue;
     const k=g.join(' ');c[k]=(c[k]||0)+1}
-  const top=Object.entries(c).filter(e=>n===1||e[1]>1).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,8),max=top[0]?top[0][1]:1;
+  const top=Object.entries(c).filter(e=>n===1||e[1]>1).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,10),max=top[0]?top[0][1]:1;
   $('kw').replaceChildren(...top.map(([k,x])=>{const li=document.createElement('li');li.innerHTML='<span></span><span></span><i></i>';
     li.children[0].textContent=k;li.children[1].textContent=x+' · '+(x/lw.length*100).toFixed(1)+'%';li.children[2].style.width=x/max*100+'%';return li}));
   $('kwe').hidden=top.length>0;$('kwe').textContent=n>1?'No phrase repeats yet.':'Start typing to see your most-used words.';
