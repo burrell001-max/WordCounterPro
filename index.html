@@ -4,14 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WordCounterPro – Advanced Online Word & Character Counter</title>
-<meta name="description" content="Free online word counter, character counter, Flow Score analyzer, speech reader, voice typing, and document editor. Works entirely in your browser.">
+<meta name="description" content="Free online word counter, character counter, Flow Score analyzer, speech reader, voice typing, and document editor. Your text stays in your browser.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314213d'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='700' text-anchor='middle' fill='%23f2a900' font-family='Georgia,serif'%3EW%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#14213d">
+<link rel="canonical" href="https://www.YOURDOMAIN.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WordCounterPro – Free Word &amp; Character Counter">
+<meta property="og:description" content="Free online word counter, character counter, Flow Score analyzer, voice typing, and document editor.">
+<meta property="og:url" content="https://www.YOURDOMAIN.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Open+Sans:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<!-- PDF generation engine -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #eef1f6;
@@ -63,8 +66,8 @@ nav a:not(.logo):hover { opacity: 1; text-decoration: underline; }
 
 /* Header Banner */
 .top { background: var(--head); border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.top h1 { margin: 0; font: 600 42px/1.05 "Newsreader", Georgia, serif; font-variant-numeric: tabular-nums; }
-.top h1 span { color: var(--muted); font-size: .62em; font-weight: 400; }
+.top .bigcount { margin: 0; font: 600 42px/1.05 "Newsreader", Georgia, serif; font-variant-numeric: tabular-nums; }
+.top .bigcount span { color: var(--muted); font-size: .62em; font-weight: 400; }
 .top p { margin: 0; color: var(--muted); font-size: 14px; max-width: 240px; text-align: right; }
 
 /* Documents bar */
@@ -191,7 +194,7 @@ body.basic textarea { min-height: 75vh; }
 @media (max-width: 860px) {
   .layout { grid-template-columns: 1fr; }
   textarea { min-height: 300px; }
-  .top h1 { font-size: 32px; }
+  .top .bigcount { font-size: 32px; }
   .top p { text-align: left; max-width: 100%; }
 }
 
@@ -201,6 +204,7 @@ footer h4 { margin: 0 0 10px; font: 600 17px "Newsreader", serif; }
 footer a { opacity: .85; text-decoration: none; }
 footer a:hover { text-decoration: underline; opacity: 1; }
 .fl a { display: inline-block; margin: 0 4px; }
+.top h1 { margin: 0 0 4px; font: 600 14px "Instrument Sans", system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -236,12 +240,11 @@ footer a:hover { text-decoration: underline; opacity: 1; }
     <button id="morenav" aria-haspopup="true">More ▾</button>
     <ul>
       <li><a href="#how">How it works</a></li>
-      <li><a href="#contact">Contact & Feedback</a></li>
-      <li><a href="#bug">Report a Bug</a></li>
-      <li><a href="#privacy">Privacy Policy</a></li>
-      <li><a href="#terms">Terms of Use</a></li>
-      <li><a href="#sitemap">Sitemap</a></li>
-      <li><a href="#aboutus">About Us</a></li>
+      <li><a href="contact.html">Contact & Feedback</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Use</a></li>
+      <li><a href="sitemap.html">Sitemap</a></li>
+      <li><a href="about.html">About Us</a></li>
     </ul>
   </div>
 </div></nav>
@@ -249,8 +252,9 @@ footer a:hover { text-decoration: underline; opacity: 1; }
 <main class="wrap" id="top">
 
 <div class="top">
-  <h1><span id="hw">0</span> <span>words</span> <span id="hc">0</span> <span>characters</span></h1>
-  <p>Free online text analysis and counter. Everything runs locally in your browser.</p>
+  <h1>Free Word Counter &amp; Character Counter</h1>
+  <div class="bigcount"><span id="hw">0</span> <span>words</span> <span id="hc">0</span> <span>characters</span></div>
+  <p>Free online text analysis and counter. Your text is processed locally in your browser.</p>
 </div>
 
 <div class="layout">
@@ -319,7 +323,7 @@ footer a:hover { text-decoration: underline; opacity: 1; }
   <p>Whether you are drafting a 500-word blog article, meeting a strict 10,000-character university essay limit, or writing a full-length book manuscript, WordCounterPro helps you monitor your progress accurately. Everything is calculated live as you type, delete, or paste text.</p>
 
   <h3>Key Features &amp; Tools</h3>
-  <p><strong>1. Privacy-First Architecture:</strong> Your document is processed entirely in your browser memory. We never store, transmit, or analyze your content on external servers.</p>
+  <p><strong>1. Privacy-First Design:</strong> The text you type or paste is processed in your browser. We do not store it or send it to our servers. If you use voice dictation, your browser's own speech service handles the audio. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
   <p><strong>2. Advanced Flow Score:</strong> Analyze sentence structure across six unique length categories to ensure your prose is engaging, varied, and free of repetitive, monotonous patterns.</p>
   <p><strong>3. Integrated Voice Tools:</strong> Use <em>Talk to Type</em> for dictating ideas hands-free via web speech recognition, and <em>Read Aloud</em> to proofread drafts with natural voice synthesis.</p>
   <p><strong>4. Export &amp; File Support:</strong> Import plain text files (.txt) and export your work seamlessly into formatted TXT or clean PDF documents.</p>
@@ -451,7 +455,36 @@ footer a:hover { text-decoration: underline; opacity: 1; }
   <h3>Flesch–Kincaid Readability Formula</h3>
   <p>Our Reading Level indicator utilizes the standardized Flesch–Kincaid Grade Level metric. By evaluating average sentence length (words per sentence) alongside average word complexity (syllables per word), the tool calculates an estimated U.S. grade level required for comprehension.</p>
   <h3>Privacy &amp; Data Security</h3>
-  <p>All data stays within your local machine's storage memory (localStorage). Nothing is ever sent to third-party database servers, guaranteeing complete privacy for confidential drafts, proprietary business articles, or personal journals.</p>
+  <p>Your documents and settings are saved in your own browser's local storage, and the text you write is not uploaded to our servers. Third-party services such as Google Fonts, advertising partners, and your browser's speech recognition may receive standard technical data such as your IP address, as described in our <a href="privacy.html">Privacy Policy</a>. Clearing your browser data removes your saved documents.</p>
+</article>
+
+<article class="card" id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <h3>How does WordCounterPro count words?</h3>
+  <p>A word is any run of characters separated by spaces or line breaks. Hyphenated terms such as "well-known" count as one word. Different programs follow different rules, so if you are submitting to a school or publisher, confirm that its counter agrees with ours.</p>
+  <h3>Does the character count include spaces?</h3>
+  <p>The details panel shows characters both with and without spaces, so you can match whichever rule your limit uses. Social media platforms and most application forms count spaces.</p>
+  <h3>How is the reading level calculated?</h3>
+  <p>We use the Flesch&ndash;Kincaid Grade Level formula, which compares your average sentence length and your average syllables per word to estimate the U.S. school grade needed to follow the text. Shorter sentences and simpler words lower the grade.</p>
+  <h3>How are reading and speaking times estimated?</h3>
+  <p>Reading time assumes an average silent reading speed of 238 words per minute, and speaking time assumes 150 words per minute. You can change both speeds in Settings to match your own pace.</p>
+  <h3>What is Flow Score?</h3>
+  <p>Flow Score looks at how varied your sentence lengths are. Text where every sentence is about the same length can feel monotone, while a mix of short and long sentences usually reads more naturally.</p>
+  <h3>Is my text saved anywhere?</h3>
+  <p>Auto-save keeps your document in your browser's local storage on your device. We do not receive it. Clearing your browser data deletes it, so export a copy of anything important.</p>
+
+  <h3>Common word and character limits</h3>
+  <p>Limits change, so always confirm with the platform or organization. These are widely used guidelines:</p>
+  <ul>
+    <li>Common App personal essay: 650 words maximum</li>
+    <li>X (Twitter) standard post: 280 characters</li>
+    <li>Instagram caption: 2,200 characters</li>
+    <li>LinkedIn post: 3,000 characters</li>
+    <li>YouTube video title: 100 characters</li>
+    <li>SEO page title: about 60 characters</li>
+    <li>SEO meta description: about 155&ndash;160 characters</li>
+  </ul>
+  <p>Wondering how long a blog post should be? Read <a href="blog-ideal-blog-post-length-seo.html">How Long Should a Blog Post Be for SEO in 2026?</a></p>
 </article>
 
 <!-- Blog Section -->
@@ -461,6 +494,14 @@ footer a:hover { text-decoration: underline; opacity: 1; }
   
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:16px;">
     
+    <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <h3 style="margin:0 0 6px;font:600 18px 'Newsreader',serif;">How Long Should a Blog Post Be for SEO in 2026?</h3>
+        <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;">What the research says about ideal post length for Google and AI search, with word counts by content type and a way to find the right length for your keyword.</p>
+      </div>
+      <a href="blog-ideal-blog-post-length-seo.html" class="solid" style="display:inline-block;text-align:center;text-decoration:none;padding:6px 12px;font-size:13px;border-radius:6px;align-self:flex-start;">Read Article »</a>
+    </div>
+
     <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;">
       <div>
         <h3 style="margin:0 0 6px;font:600 18px 'Newsreader',serif;">Cutting a Draft to a Strict Word Limit</h3>
@@ -512,56 +553,6 @@ footer a:hover { text-decoration: underline; opacity: 1; }
   </div>
 </article>
 
-<article class="card" id="contact">
-  <h2>Contact &amp; Feedback</h2>
-  <p>We welcome feature suggestions, feedback, and user inquiries! Reach out to us via email:</p>
-  <p><strong>Email:</strong> WordCounterPro@outlook.com</p>
-</article>
-
-<article class="card" id="bug">
-  <h2>Report a Bug</h2>
-  <p>Encountered an issue or calculation bug? Help us improve WordCounterPro by letting us know what happened.</p>
-  <form onsubmit="alert('Thank you for your report!'); this.reset(); return false;" style="display:grid;gap:10px;max-width:500px;margin-top:14px;">
-    <label style="font-size:14px;font-weight:500;">Description of issue:
-      <textarea style="min-height:100px;border:1px solid var(--line);border-radius:6px;background:var(--bg);margin-top:4px;" required></textarea>
-    </label>
-    <label style="font-size:14px;font-weight:500;">Your Email (optional):
-      <input type="email" style="border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:8px;width:100%;margin-top:4px;">
-    </label>
-    <button type="submit" class="solid" style="justify-self:start;">Send Bug Report</button>
-  </form>
-</article>
-
-<article class="card" id="privacy">
-  <h2>Privacy Policy</h2>
-  <p>WordCounterPro operates under a strict client-side architecture. We do not collect, store, or sell personal data or document contents. Auto-save documents and settings are saved exclusively within your browser's local storage memory.</p>
-</article>
-
-<article class="card" id="terms">
-  <h2>Terms of Use</h2>
-  <p>WordCounterPro is provided as a free utility "as is" without express or implied warranties. Users are solely responsible for verifying important calculations for professional or academic publishing standards.</p>
-</article>
-
-<article class="card" id="sitemap">
-  <h2>Sitemap</h2>
-  <ul class="sitemap">
-    <li><a href="#top">Home – Text Counter &amp; Editor</a></li>
-    <li><a href="#more-tools">More Writing Tools</a></li>
-    <li><a href="#how">How it Works</a></li>
-    <li><a href="#blog">Blog &amp; Writing Guides</a></li>
-    <li><a href="#contact">Contact Us</a></li>
-    <li><a href="#bug">Report a Bug</a></li>
-    <li><a href="#privacy">Privacy Policy</a></li>
-    <li><a href="#terms">Terms of Use</a></li>
-    <li><a href="#aboutus">About Us</a></li>
-  </ul>
-</article>
-
-<article class="card" id="aboutus">
-  <h2>About Us</h2>
-  <p>WordCounterPro was founded to provide writers with a clean, fast, privacy-focused online document editing tool that works without bloat or mandatory account sign-ups. Built with modern web standards, it is light enough to load instantly anywhere in the world.</p>
-</article>
-
 </main>
 
 <footer><div>
@@ -572,12 +563,11 @@ footer a:hover { text-decoration: underline; opacity: 1; }
   <section style="flex:1;min-width:240px;">
     <h4>Quick Navigation</h4>
     <span class="fl">
-      <a href="#aboutus">About Us</a> | 
-      <a href="#contact">Contact</a> | 
-      <a href="#bug">Report Bug</a> | 
-      <a href="#sitemap">Sitemap</a> | 
-      <a href="#terms">Terms of Use</a> | 
-      <a href="#privacy">Privacy Policy</a>
+      <a href="about.html">About Us</a> | 
+      <a href="contact.html">Contact</a> | 
+      <a href="sitemap.html">Sitemap</a> | 
+      <a href="terms.html">Terms of Use</a> | 
+      <a href="privacy.html">Privacy Policy</a>
     </span>
   </section>
 </div></footer>
@@ -957,7 +947,7 @@ function addActivity(count) {
 function showActivityModal() {
   let act = {};
   try { act = JSON.parse(store.get('wcp-act') || '{}'); } catch(e) {}
-  const days = [6,5,4,3,2,1,0].map(o => [getDayKey(o), act[getDayKey(o]] || 0]);
+  const days = [6,5,4,3,2,1,0].map(o => [getDayKey(o), act[getDayKey(o)] || 0]);
   const maxVal = Math.max(1, ...days.map(d => d[1]));
   const container = $('bars');
   container.innerHTML = '';
@@ -991,6 +981,12 @@ function applySettings() {
     roboto: '"Roboto", sans-serif',
     mono: '"Courier Prime", monospace'
   };
+  const extraFonts = { inter: 'Inter:wght@400;500;600', roboto: 'Roboto:wght@400;500;700', mono: 'Courier+Prime' };
+  if (extraFonts[settings.font] && !document.getElementById('font-' + settings.font)) {
+    const l = document.createElement('link'); l.id = 'font-' + settings.font; l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=' + extraFonts[settings.font] + '&display=swap';
+    document.head.appendChild(l);
+  }
   document.documentElement.style.setProperty('--font-family', fontMap[settings.font] || fontMap.serif);
   document.querySelectorAll('#detailsBox .row').forEach(row => {
     const key = row.dataset.stat;
@@ -1121,13 +1117,24 @@ $('dlTxt').onclick = () => {
   URL.revokeObjectURL(a.href);
 };
 
+function loadPdfLib() {
+  return new Promise((resolve, reject) => {
+    if (typeof html2pdf !== 'undefined') return resolve();
+    const sc = document.createElement('script');
+    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    sc.onload = resolve; sc.onerror = reject;
+    document.head.appendChild(sc);
+  });
+}
+
 $('dlPdf').onclick = () => {
   $('dlmenu').classList.remove('open');
-  if (typeof html2pdf === 'undefined') { alert('PDF engine loading...'); return; }
-  const element = document.createElement('div');
-  element.style.padding = '30px'; element.style.fontFamily = 'serif'; element.style.fontSize = '14pt'; element.style.whiteSpace = 'pre-wrap';
-  element.textContent = tArea.value;
-  html2pdf().set({ margin: 1, filename: 'wordcounterpro-document.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(element).save();
+  loadPdfLib().then(() => {
+    const element = document.createElement('div');
+    element.style.padding = '30px'; element.style.fontFamily = 'serif'; element.style.fontSize = '14pt'; element.style.whiteSpace = 'pre-wrap';
+    element.textContent = tArea.value;
+    html2pdf().set({ margin: 1, filename: 'wordcounterpro-document.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(element).save();
+  }).catch(() => alert('Could not load the PDF engine. Check your connection and try again.'));
 };
 
 $('settingsBtn').onclick = () => {
