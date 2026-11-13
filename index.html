@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WordCounterPro – Free Word and Character Counter</title>
 <meta name="description" content="Count words, characters, sentences and paragraphs as you type. Reading level, keyword density, word goals and daily activity.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314213d'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='700' text-anchor='middle' fill='%23f2a900' font-family='Georgia,serif'%3EW%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#14213d">
+<meta property="og:title" content="WordCounterPro – Free Word and Character Counter">
+<meta property="og:description" content="Count words, characters and sentences as you type. Private, free, and runs in your browser.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -73,6 +78,7 @@ dialog input{font:inherit;padding:8px 10px;width:100%;border:1px solid var(--lin
 .bars{display:flex;align-items:flex-end;gap:8px;height:150px;margin-top:8px}
 .bars div{flex:1;text-align:center;font-size:12px;color:var(--muted);display:flex;flex-direction:column;justify-content:flex-end;height:100%}
 .bars i{display:block;background:var(--accent);border-radius:4px 4px 0 0;margin-bottom:4px;min-height:2px}
+body.basic aside,body.basic article,body.basic .top{display:none}body.basic .layout{grid-template-columns:1fr}body.basic textarea{min-height:68vh}
 @media (max-width:860px){.layout{grid-template-columns:1fr}textarea{min-height:280px}.top h1{font-size:34px}}
 </style>
 </head>
@@ -86,6 +92,7 @@ dialog input{font:inherit;padding:8px 10px;width:100%;border:1px solid var(--lin
  <symbol id="dl" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
  <symbol id="clr" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"/></symbol>
  <symbol id="save" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7V4M8 20v-6h8v6"/></symbol>
+ <symbol id="exp" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
  <symbol id="case" viewBox="0 0 24 24"><path d="M3 18l5-12 5 12M5 14h6M15 18v-5a3 3 0 016 0v5M15 16h6"/></symbol>
 </svg>
 
@@ -113,6 +120,7 @@ dialog input{font:inherit;padding:8px 10px;width:100%;border:1px solid var(--lin
     <button id="goalbtn"><svg class="i"><use href="#goal"/></svg>Goal</button>
     <button id="actbtn"><svg class="i"><use href="#act"/></svg>Activity</button>
     <button id="autosave" class="on"><svg class="i"><use href="#save"/></svg>Auto-save on</button>
+    <button id="basic"><svg class="i"><use href="#exp"/></svg>Go basic</button>
     <button id="dl"><svg class="i"><use href="#dl"/></svg>Download</button>
     <button id="clear"><svg class="i"><use href="#clr"/></svg>Clear</button>
   </div>
@@ -244,6 +252,7 @@ $('goalclr').onclick=()=>{goal=0;store.set('wcp-goal',0);$('goald').close();upda
 $('actbtn').onclick=showActivity;$('actok').onclick=()=>$('actd').close();
 const autoUI=()=>{$('autosave').classList.toggle('on',autosave);$('autosave').lastChild.textContent='Auto-save '+(autosave?'on':'off')};
 $('autosave').onclick=()=>{autosave=!autosave;store.set('wcp-auto',autosave?'1':'0');if(autosave)store.set('wcp-text',t.value);else store.set('wcp-text','');autoUI()};
+$('basic').onclick=()=>{const b=document.body.classList.toggle('basic');$('basic').lastChild.textContent=b?'Full view':'Go basic';store.set('wcp-basic',b?'1':'0')};
 $('dl').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t.value],{type:'text/plain'}));a.download='my-text.txt';a.click();URL.revokeObjectURL(a.href)};
 $('clear').onclick=()=>{if(t.value&&!confirm('Clear all text?'))return;t.value='';prev=0;update(true);store.set('wcp-text','');t.focus()};
 $('morebtn').onclick=()=>{const m=$('more');m.classList.toggle('show');$('morebtn').textContent=m.classList.contains('show')?'Show fewer details':'Show more details'};
@@ -251,6 +260,7 @@ document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{n=+b.dataset.
 
 if(autosave)t.value=store.get('wcp-text')||'';
 autoUI();update(true);
+if(store.get('wcp-basic')==='1')$('basic').click();
 </script>
 </body>
 </html>
