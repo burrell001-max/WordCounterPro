@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goal Tracker – WordCounterPro</title>
+<meta name="description" content="Set real-time visual target goals for words, characters, and pages while writing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f6;--panel:#fff;--ink:#14213d;--muted:#5b6785;--line:#d5dbe8;--accent:#f2a900;--on-accent:#14213d;--nav:#14213d;--on-nav:#eef1f6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Instrument Sans",sans-serif}
+nav{background:var(--nav);color:var(--on-nav);padding:14px 20px}
+nav > div{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.logo{font:700 24px "Newsreader",serif;text-decoration:none;color:inherit}.logo b{background:var(--accent);color:var(--on-accent);padding:2px 6px;border-radius:4px}
+.wrap{max-width:1000px;margin:30px auto;padding:0 20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,0.03)}
+h1{font:600 36px "Newsreader",serif;margin:0 0 10px}
+textarea{width:100%;min-height:260px;padding:16px;font:18px/1.6 "Newsreader",serif;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);resize:vertical}
+.track{height:14px;background:var(--line);border-radius:7px;overflow:hidden;margin:16px 0}.bar{height:100%;width:0;background:var(--accent);transition:width 0.2s}
+input{padding:8px;border:1px solid var(--line);border-radius:6px;width:120px;margin-right:12px}
+footer{background:var(--nav);color:var(--on-nav);text-align:center;padding:20px;margin-top:60px;font-size:14px}
+</style>
+</head>
+<body>
+<nav><div><a class="logo" href="index.html">WordCounter<b>Pro</b></a><a href="index.html" style="color:inherit;text-decoration:none;font-weight:500;">« Back to Main Counter</a></div></nav>
+<main class="wrap">
+<div class="card">
+  <h1>Writing Goal Tracker</h1>
+  <p style="color:var(--muted);">Set your target word count and watch your progress bar fill as you write.</p>
+  <div style="margin-bottom:12px;">
+    <label>Word Target: <input type="number" id="target" value="500" oninput="update()"></label>
+    <span id="status" style="font-weight:600;">0 / 500 words</span>
+  </div>
+  <div class="track"><div class="bar" id="bar"></div></div>
+  <textarea id="box" placeholder="Start writing to track your goal progress live..." oninput="update()"></textarea>
+</div>
+</main>
+<footer><p>© WordCounterPro. Contact: WordCounterPro@outlook.com</p></footer>
+<script>
+function update(){
+  const w=(document.getElementById('box').value.match(/[\p{L}\p{N}]+/gu)||[]).length;
+  const target=parseInt(document.getElementById('target').value)||1;
+  const pct=Math.min(100,(w/target)*100);
+  document.getElementById('bar').style.width=pct+'%';
+  document.getElementById('status').textContent=`${w} / ${target} words (${Math.round(pct)}%)`;
+}
+</script>
+</body>
+</html>
