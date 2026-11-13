@@ -1,35 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WordCounterPro – Advanced Online Word & Character Counter</title>
+<meta name="description" content="Free online word counter, character counter, Flow Score analyzer, speech reader, voice typing, and document editor. Works entirely in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314213d'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='700' text-anchor='middle' fill='%23f2a900' font-family='Georgia,serif'%3EW%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#14213d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Open+Sans:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- PDF generation engine -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+:root {
+  --bg: #eef1f6;
+  --panel: #ffffff;
+  --ink: #14213d;
+  --muted: #5b6785;
+  --line: #d5dbe8;
+  --accent: #f2a900;
+  --on-accent: #14213d;
+  --nav: #14213d;
+  --on-nav: #eef1f6;
+  --head: #e1e7f3;
+  --font-family: "Newsreader", Georgia, serif;
+  --font-size: 19px;
+  --read-wpm: 238;
+  --speak-wpm: 150;
+  color-scheme: light;
+}
+body.dark-theme {
+  --bg: #0e1524;
+  --panel: #172036;
+  --ink: #e8ecf6;
+  --muted: #9aa6c4;
+  --line: #2a3654;
+  --accent: #f2b933;
+  --on-accent: #14213d;
+  --nav: #0a1020;
+  --on-nav: #e8ecf6;
+  --head: #1b2742;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 "Instrument Sans", system-ui, sans-serif; transition: background 0.2s, color 0.2s; }
+a { color: inherit; }
+
+/* Navigation */
+nav { background: var(--nav); color: var(--on-nav); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+nav > div { max-width: 1140px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.logo { display: grid; gap: 2px; font: 700 25px/1 "Newsreader", Georgia, serif; text-decoration: none; margin-right: auto; }
+.logo small { font: 500 11px "Instrument Sans", sans-serif; letter-spacing: .04em; opacity: .8; }
+.logo b { background: var(--accent); color: var(--on-accent); padding: 2px 6px; border-radius: 4px; margin-left: 3px; }
+nav a:not(.logo) { text-decoration: none; opacity: .85; font-size: 15px; font-weight: 500; }
+nav a:not(.logo):hover { opacity: 1; text-decoration: underline; }
+
+.wrap { max-width: 1140px; margin: 0 auto; padding: 20px 20px 40px; }
+.layout { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+
+/* Header Banner */
+.top { background: var(--head); border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.top h1 { margin: 0; font: 600 42px/1.05 "Newsreader", Georgia, serif; font-variant-numeric: tabular-nums; }
+.top h1 span { color: var(--muted); font-size: .62em; font-weight: 400; }
+.top p { margin: 0; color: var(--muted); font-size: 14px; max-width: 240px; text-align: right; }
+
+/* Documents bar */
+.doc-bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(0,0,0,0.03); border-bottom: 1px solid var(--line); overflow-x: auto; }
+.doc-tabs { display: flex; gap: 6px; flex: 1; overflow-x: auto; scrollbar-width: thin; }
+.doc-tab { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; }
+.doc-tab.active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; }
+.doc-tab span.close-tab { opacity: 0.6; padding: 0 2px; border-radius: 3px; }
+.doc-tab span.close-tab:hover { opacity: 1; background: rgba(0,0,0,0.15); }
+.add-doc-btn { padding: 4px 10px; font-size: 16px; font-weight: bold; line-height: 1; border: 1px dashed var(--line); }
+
+/* Main Toolbar */
+.tools { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.tools button, .tools label.btn-label { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-width: 58px; padding: 6px 6px 5px; font-size: 11px; font-weight: 500; border-radius: 6px; cursor: pointer; background: transparent; color: var(--ink); border: 1px solid transparent; text-decoration: none; }
+.tools button:hover, .tools label.btn-label:hover { background: var(--bg); border-color: var(--line); }
+.tools button.on { background: var(--accent); color: var(--on-accent); font-weight: 600; }
+.tools button.recording { background: #e63946; color: #fff; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
+svg.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+button { font: 500 14px "Instrument Sans", system-ui, sans-serif; border: 1px solid transparent; background: transparent; color: var(--ink); cursor: pointer; }
+button.solid { background: var(--accent); color: var(--on-accent); padding: 8px 16px; border-radius: 6px; font-weight: 600; }
+button.solid:hover { opacity: 0.9; }
+button.outline { border-color: var(--line); padding: 7px 14px; border-radius: 6px; }
+button.outline:hover { background: var(--bg); }
+
+.menu { position: relative; }
+.menu ul { display: none; position: absolute; z-index: 50; top: 100%; left: 0; margin: 2px 0 0; padding: 4px; list-style: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; min-width: 160px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.menu.open ul { display: block; }
+.menu li button, .menu li a { width: 100%; text-align: left; padding: 7px 10px; font-size: 13px; border-radius: 4px; display: block; text-decoration: none; color: var(--ink); }
+.menu li button:hover, .menu li a:hover { background: var(--bg); }
+
+/* Editor Text Area */
+.editor-container { position: relative; min-height: 420px; }
+textarea { display: block; width: 100%; min-height: 420px; resize: vertical; border: 0; padding: 22px; background: transparent; color: var(--ink); font-family: var(--font-family); font-size: var(--font-size); line-height: 1.65; }
+textarea:focus-visible { outline: none; box-shadow: inset 0 0 0 3px var(--accent); }
+
+/* Footer bar of Editor */
+.foot { display: flex; align-items: center; gap: 14px; padding: 12px 18px; border-top: 1px solid var(--line); flex-wrap: wrap; background: var(--panel); }
+.foot strong { font-size: 16px; font-weight: 600; }
+.goalbar { flex: 1; min-width: 140px; display: none; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+.goalbar.show { display: flex; }
+.track { flex: 1; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.track i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+
+/* Sidebar Panels */
+aside { display: grid; gap: 14px; }
+.box h2 { margin: 0; padding: 12px 16px; font: 600 17px "Newsreader", serif; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+.row { display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; border-bottom: 1px solid var(--line); font-size: 14px; }
+.row:last-of-type { border: 0; }
+.pill { background: var(--ink); color: var(--bg); border-radius: 12px; padding: 1px 9px; font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
+.more { display: none; }
+.more.show { display: block; }
+.link-row { padding: 8px 16px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.link-row button { color: var(--muted); padding: 2px 0; border: 0; font-size: 13px; font-weight: 500; }
+.link-row button:hover { color: var(--ink); text-decoration: underline; }
+
+.seg { display: flex; gap: 4px; padding: 10px 16px 0; }
+.seg button { border: 1px solid var(--line); padding: 3px 10px; font-size: 12px; border-radius: 4px; }
+.seg button.on { background: var(--accent); color: var(--on-accent); font-weight: 600; border-color: var(--accent); }
+
+ol.kw-list { list-style: none; margin: 0; padding: 8px 16px 14px; display: grid; gap: 8px; }
+ol.kw-list li { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; font-size: 13.5px; }
+ol.kw-list li i { grid-column: 1/-1; height: 4px; border-radius: 2px; background: var(--accent); }
+.empty { margin: 0; padding: 14px 16px; color: var(--muted); font-size: 13.5px; font-style: italic; }
+
+/* Flow Score Styling */
+.fscore { display: flex; align-items: baseline; gap: 10px; padding: 10px 16px 4px; }
+.fscore b { font: 600 36px/1 "Newsreader", serif; }
+.fscore span { color: var(--muted); font-size: 13px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 8px; padding: 4px 16px 8px; font-size: 11px; color: var(--muted); }
+.legend span { padding: 1px 5px; border-radius: 3px; font-weight: 500; }
+.fview { margin: 0 16px 16px; max-height: 240px; overflow-y: auto; font: 400 15px/1.7 "Newsreader", Georgia, serif; padding: 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
+.cat-vs { background: rgba(147, 197, 253, 0.45); }
+.cat-s  { background: rgba(187, 247, 208, 0.45); }
+.cat-m  { background: rgba(254, 240, 138, 0.45); }
+.cat-l  { background: rgba(253, 230, 138, 0.55); }
+.cat-vl { background: rgba(254, 215, 170, 0.65); }
+.cat-ex { background: rgba(254, 202, 202, 0.75); }
+.rp-flag { border-bottom: 2px dotted #dc2626; }
+
+/* Articles / Content Sections */
+article { margin-top: 22px; padding: 26px 28px; max-width: none; }
+article h2 { margin: 0 0 12px; font: 600 28px "Newsreader", serif; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+article p { max-width: 78ch; color: var(--muted); margin: 0 0 14px; font-size: 15px; }
+article h3 { margin: 20px 0 8px; font: 600 19px "Newsreader", serif; color: var(--ink); }
+.post { margin: 18px 0; padding-left: 12px; border-left: 3px solid var(--accent); }
+.sitemap { margin: 0; padding: 0 0 0 18px; list-style: disc; display: block; }
+.sitemap li { display: list-item; margin: 5px 0; font-size: 15px; }
+
+/* Modal Dialogs */
+dialog { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--ink); padding: 22px; width: min(460px, 92vw); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+dialog::backdrop { background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); }
+dialog h2 { margin: 0 0 14px; font: 600 22px "Newsreader", serif; }
+dialog label { display: block; margin: 10px 0 4px; font-size: 13.5px; font-weight: 500; }
+dialog input, dialog select { font: inherit; padding: 8px 10px; width: 100%; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); margin-bottom: 8px; }
+.acts { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+
+/* Bars graph for Activity */
+.bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; margin-top: 12px; }
+.bars div { flex: 1; text-align: center; font-size: 11px; color: var(--muted); display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.bars i { display: block; background: var(--accent); border-radius: 4px 4px 0 0; margin-bottom: 4px; min-height: 2px; }
+
+/* Utility / Switch */
+.sw { margin-left: auto; position: relative; width: 42px; height: 22px; display: inline-block; }
+.sw input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; width: 100%; height: 100%; z-index: 2; }
+.sw i { position: absolute; inset: 0; border-radius: 11px; background: var(--line); pointer-events: none; transition: .15s; }
+.sw i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: .15s; }
+.sw input:checked + i { background: var(--accent); }
+.sw input:checked + i::after { transform: translateX(20px); }
+
+.tip { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--line); color: var(--muted); font: 600 11px sans-serif; margin-left: 6px; position: relative; cursor: help; }
+.tip::after { content: attr(data-tip); display: none; position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%); width: 210px; padding: 7px 9px; background: var(--ink); color: var(--bg); border-radius: 6px; font: 400 12px/1.4 "Instrument Sans", sans-serif; z-index: 60; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.tip:hover::after, .tip:focus::after { display: block; }
+.share { display: flex; gap: 5px; }
+.share a { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 5px; background: var(--ink); color: var(--bg); font: 700 12px sans-serif; text-decoration: none; }
+.share a:hover { background: var(--accent); color: var(--on-accent); }
+.new { background: var(--accent); color: var(--on-accent); font: 700 10px "Instrument Sans", sans-serif; padding: 2px 6px; border-radius: 8px; margin-left: 4px; }
+
+/* Responsive adjustments */
+body.basic aside, body.basic article, body.basic .top { display: none; }
+body.basic .layout { grid-template-columns: 1fr; }
+body.basic textarea { min-height: 75vh; }
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+  textarea { min-height: 300px; }
+  .top h1 { font-size: 32px; }
+  .top p { text-align: left; max-width: 100%; }
+}
+
+footer { background: var(--nav); color: var(--on-nav); margin-top: 40px; }
+footer > div { max-width: 1140px; margin: 0 auto; padding: 30px 20px; display: flex; gap: 40px; flex-wrap: wrap; font-size: 14px; }
+footer h4 { margin: 0 0 10px; font: 600 17px "Newsreader", serif; }
+footer a { opacity: .85; text-decoration: none; }
+footer a:hover { text-decoration: underline; opacity: 1; }
+.fl a { display: inline-block; margin: 0 4px; }
+</style>
+</head>
+<body>
+
+<!-- SVG Icon Symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="paste" viewBox="0 0 24 24"><path d="M9 3h6v4H9zM7 5H5v16h14V5h-2"/></symbol>
+ <symbol id="undo" viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5M4 12h10a6 6 0 010 8"/></symbol>
+ <symbol id="redo" viewBox="0 0 24 24"><path d="M15 7l5 5-5 5M20 12H10a6 6 0 000 8"/></symbol>
+ <symbol id="goal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></symbol>
+ <symbol id="act" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></symbol>
+ <symbol id="dl" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+ <symbol id="ul" viewBox="0 0 24 24"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"/></symbol>
+ <symbol id="clr" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"/></symbol>
+ <symbol id="save" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7V4M8 20v-6h8v6"/></symbol>
+ <symbol id="exp" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+ <symbol id="case" viewBox="0 0 24 24"><path d="M3 18l5-12 5 12M5 14h6M15 18v-5a3 3 0 016 0v5M15 16h6"/></symbol>
+ <symbol id="find" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></symbol>
+ <symbol id="clean" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></symbol>
+ <symbol id="print" viewBox="0 0 24 24"><path d="M6 9V4h12v5M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v6H6z"/></symbol>
+ <symbol id="mic" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></symbol>
+ <symbol id="speaker" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></symbol>
+ <symbol id="gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+ <symbol id="bug" viewBox="0 0 24 24"><rect x="8" y="6" width="8" height="14" rx="4"/><path d="M6 13h12M4 9h16M4 17h16M10 2l-2 3M14 2l2 3"/></symbol>
+</svg>
+
+<nav><div>
+  <a class="logo" href="#top"><span>WordCounter<b>Pro</b></span><small>Every Word Counts</small></a>
+  <a href="#top">Home</a>
+  <a href="#more-tools">More Tools</a>
+  <a href="#blog">Blog</a>
+  <div class="menu" id="moremenu">
+    <button id="morenav" aria-haspopup="true">More ▾</button>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#contact">Contact & Feedback</a></li>
+      <li><a href="#bug">Report a Bug</a></li>
+      <li><a href="#privacy">Privacy Policy</a></li>
+      <li><a href="#terms">Terms of Use</a></li>
+      <li><a href="#sitemap">Sitemap</a></li>
+      <li><a href="#aboutus">About Us</a></li>
+    </ul>
+  </div>
+</div></nav>
+
+<main class="wrap" id="top">
+
+<div class="top">
+  <h1><span id="hw">0</span> <span>words</span> <span id="hc">0</span> <span>characters</span></h1>
+  <p>Free online text analysis and counter. Everything runs locally in your browser.</p>
+</div>
+
+<div class="layout">
+<div>
+
+<section class="card" aria-label="Editor">
+  <!-- Multi-Document Bar -->
+  <div class="doc-bar">
+    <div class="doc-tabs" id="docTabs"></div>
+    <button class="doc-tab add-doc-btn" id="addDocBtn" title="Create new document">+</button>
+  </div>
+
+  <!-- Writing Toolbar -->
+  <div class="tools" role="toolbar" aria-label="Editor toolbar">
+    <button id="pasteBtn"><svg class="i"><use href="#paste"/></svg>Paste</button>
+    <div class="menu" id="casemenu">
+      <button id="casebtn" aria-haspopup="true"><svg class="i"><use href="#case"/></svg>Case ▾</button>
+      <ul>
+        <li><button data-case="upper">UPPERCASE</button></li>
+        <li><button data-case="lower">lowercase</button></li>
+        <li><button data-case="title">Title Case</button></li>
+        <li><button data-case="sentence">Sentence case</button></li>
+      </ul>
+    </div>
+    <button id="findBtn"><svg class="i"><use href="#find"/></svg>Find/Replace</button>
+    <button id="cleanBtn"><svg class="i"><use href="#clean"/></svg>Clean Text</button>
+    <button id="undoBtn"><svg class="i"><use href="#undo"/></svg>Undo</button>
+    <button id="redoBtn"><svg class="i"><use href="#redo"/></svg>Redo</button>
+    <button id="proofReadBtn"><svg class="i"><use href="#speaker"/></svg>Read Aloud</button>
+    <button id="talkTypeBtn"><svg class="i"><use href="#mic"/></svg>Talk to Type</button>
+    <button id="goalbtn"><svg class="i"><use href="#goal"/></svg>Goal</button>
+    <button id="actbtn"><svg class="i"><use href="#act"/></svg>Activity</button>
+    <button id="printBtn"><svg class="i"><use href="#print"/></svg>Print</button>
+    <label class="btn-label" title="Upload TXT file">
+      <svg class="i"><use href="#ul"/></svg>Upload
+      <input type="file" id="uploadFile" accept=".txt" style="display:none">
+    </label>
+    <div class="menu" id="dlmenu">
+      <button id="dlbtn" aria-haspopup="true"><svg class="i"><use href="#dl"/></svg>Download ▾</button>
+      <ul>
+        <li><button id="dlTxt">as TXT file (.txt)</button></li>
+        <li><button id="dlPdf">as PDF document (.pdf)</button></li>
+      </ul>
+    </div>
+    <button id="settingsBtn"><svg class="i"><use href="#gear"/></svg>Settings</button>
+    <button id="autosave" class="on"><svg class="i"><use href="#save"/></svg>Auto-save</button>
+    <button id="basicBtn"><svg class="i"><use href="#exp"/></svg>Go basic</button>
+    <button id="clearBtn"><svg class="i"><use href="#clr"/></svg>Clear</button>
+  </div>
+
+  <label for="t" style="position:absolute;left:-9999px">Your text area</label>
+  <div class="editor-container">
+    <textarea id="t" placeholder="Start typing, talk to type, or copy and paste your document here…"></textarea>
+  </div>
+
+  <div class="foot">
+    <strong id="fw">0 words 0 characters</strong>
+    <div class="goalbar" id="goalbar"><span id="goaltxt"></span><div class="track"><i id="goalfill"></i></div></div>
+  </div>
+</section>
+
+<!-- SEO Content / Main Overview -->
+<article class="card" id="whatis">
+  <h2>What is WordCounterPro?</h2>
+  <p>WordCounterPro is a comprehensive online writing assistant designed for authors, students, journalists, and SEO professionals. In addition to instantly counting words, characters, sentences, and paragraphs, our smart editor provides real-time insights into your writing style, reading level, keyword density, and flow variety.</p>
+  <p>Whether you are drafting a 500-word blog article, meeting a strict 10,000-character university essay limit, or writing a full-length book manuscript, WordCounterPro helps you monitor your progress accurately. Everything is calculated live as you type, delete, or paste text.</p>
+
+  <h3>Key Features &amp; Tools</h3>
+  <p><strong>1. Privacy-First Architecture:</strong> Your document is processed entirely in your browser memory. We never store, transmit, or analyze your content on external servers.</p>
+  <p><strong>2. Advanced Flow Score:</strong> Analyze sentence structure across six unique length categories to ensure your prose is engaging, varied, and free of repetitive, monotonous patterns.</p>
+  <p><strong>3. Integrated Voice Tools:</strong> Use <em>Talk to Type</em> for dictating ideas hands-free via web speech recognition, and <em>Read Aloud</em> to proofread drafts with natural voice synthesis.</p>
+  <p><strong>4. Export &amp; File Support:</strong> Import plain text files (.txt) and export your work seamlessly into formatted TXT or clean PDF documents.</p>
+  <p><small>Disclaimer: Statistics and calculations are provided for guidance purposes. Always double-check exact submission guidelines for academic or official publishing requirements.</small></p>
+</article>
+
+</div>
+
+<!-- Sidebar Controls and Details -->
+<aside aria-live="polite">
+  <a class="how" href="#how" style="display:block;text-align:center;color:var(--accent);font-weight:600;text-decoration:none;">How it works »</a>
+  
+  <!-- Details Box -->
+  <div class="card box" id="detailsBox">
+    <h2>Details</h2>
+    <div class="row" data-stat="words">Words<span class="pill" id="w">0</span></div>
+    <div class="row" data-stat="chars">Characters<span class="pill" id="c">0</span></div>
+    <div class="row" data-stat="sents">Sentences<span class="pill" id="s">0</span></div>
+    <div class="row" data-stat="paras">Paragraphs<span class="pill" id="p">0</span></div>
+    <div class="row" data-stat="readlvl"><span>Reading level<span class="tip" data-tip="Estimated U.S. school grade level needed to understand the text (Flesch–Kincaid formula).">?</span></span><span class="pill" id="lvl">N/A</span></div>
+    <div class="row" data-stat="readtime"><span>Reading time<span class="tip" data-tip="Estimated silent reading time based on user speed settings.">?</span></span><span class="pill" id="rt">0 sec</span></div>
+    <div class="row" data-stat="speaktime"><span>Speaking time<span class="tip" data-tip="Estimated speech or presentation time based on speaking speed.">?</span></span><span class="pill" id="st">0 sec</span></div>
+    
+    <div class="more" id="moreStats">
+      <div class="row" data-stat="cn">Characters, no spaces<span class="pill" id="cn">0</span></div>
+      <div class="row" data-stat="uq">Unique words<span class="pill" id="uq">0</span></div>
+      <div class="row" data-stat="awl">Average word length<span class="pill" id="awl">0</span></div>
+      <div class="row" data-stat="asl">Avg sentence length (words)<span class="pill" id="asl">0</span></div>
+      <div class="row" data-stat="aslc">Avg sentence length (chars)<span class="pill" id="aslc">0</span></div>
+      <div class="row" data-stat="wpm">Typing Speed (WPM)<span class="pill" id="wpm">0</span></div>
+      <div class="row" data-stat="hwtime">Handwriting time<span class="pill" id="hwt">0 sec</span></div>
+      <div class="row" data-stat="pubwc">Publisher word count<span class="pill" id="pwc">0</span></div>
+      <div class="row" data-stat="lw">Longest word<span class="pill" id="lw">–</span></div>
+      <div class="row" data-stat="ln">Lines<span class="pill" id="ln">0</span></div>
+      <div class="row" data-stat="sy">Syllables<span class="pill" id="sy">0</span></div>
+      <div class="row" data-stat="lsent">Longest sentence<span class="pill" id="lsent">0</span></div>
+      <div class="row" data-stat="ssent">Shortest sentence<span class="pill" id="ssent">0</span></div>
+      <div class="row" data-stat="spp">Sentences per paragraph<span class="pill" id="spp">0</span></div>
+      <div class="row" data-stat="nums">Numbers count<span class="pill" id="nums">0</span></div>
+      <div class="row" data-stat="pg">Pages (500 words/page)<span class="pill" id="pg">0</span></div>
+    </div>
+    
+    <div class="link-row">
+      <button id="morebtn">More (16)</button>
+      <span class="share">
+        <a data-sh="fb" aria-label="Share on Facebook" target="_blank" rel="noopener">f</a>
+        <a data-sh="x" aria-label="Share on X" target="_blank" rel="noopener">X</a>
+        <a data-sh="li" aria-label="Share on LinkedIn" target="_blank" rel="noopener">in</a>
+        <a data-sh="rd" aria-label="Share on Reddit" target="_blank" rel="noopener">r</a>
+        <a data-sh="em" aria-label="Share by email">✉</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Flow Score Box -->
+  <div class="card box">
+    <h2>Flow Score <span class="new">NEW</span><span class="tip" data-tip="Evaluates sentence length variety. Monochrome sentence patterns decrease readability.">?</span>
+      <label class="sw"><input type="checkbox" id="flowsw" aria-label="Turn Flow Score on"><i></i></label>
+    </h2>
+    <p class="empty" id="flowoff" style="text-align:center">Turn on Flow Score to analyze sentence rhythm and highlight variety.</p>
+    <div id="flowon" hidden>
+      <div class="fscore"><b id="fs">–</b><span id="fsl"></span></div>
+      <div class="legend">
+        <span class="cat-vs">v.short (1–4)</span>
+        <span class="cat-s">short (5–9)</span>
+        <span class="cat-m">med (10–17)</span>
+        <span class="cat-l">long (18–25)</span>
+        <span class="cat-vl">v.long (26–34)</span>
+        <span class="cat-ex">extra (35+)</span>
+      </div>
+      <div class="fview" id="fview"></div>
+    </div>
+  </div>
+
+  <!-- Keyword Density Box -->
+  <div class="card box">
+    <h2>Keyword Density</h2>
+    <div class="seg" role="group" aria-label="Phrase length">
+      <button class="on" data-n="1">x1</button>
+      <button data-n="2">x2</button>
+      <button data-n="3">x3</button>
+    </div>
+    <ol class="kw-list" id="kw"></ol>
+    <p class="empty" id="kwe">Start typing to see your most-used keywords.</p>
+  </div>
+</aside>
+</div>
+
+<!-- Detailed SEO Articles & Supplemental Content -->
 <article class="card" id="more-tools">
   <h2>More Writing &amp; Text Utilities</h2>
   <p>WordCounterPro is part of a complete suite of browser-based utilities built to assist copywriters, educators, authors, and web content creators. Explore our additional tools below:</p>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px;">
     
     <a href="case-converter.html" style="text-decoration:none;color:inherit;">
-      <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);height:100%;transition:transform 0.15s, border-color 0.15s;">
-        <h3 style="margin:0 0 6px;">Case Converter »</h3>
-        <p style="font-size:13.5px;margin:0;color:var(--muted);">Quickly switch text between UPPERCASE, lowercase, Title Case, and Sentence case with a single click.</p>
-      </div>
-    </a>
-
-    <a href="text-cleaner.html" style="text-decoration:none;color:inherit;">
-      <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);height:100%;transition:transform 0.15s, border-color 0.15s;">
-        <h3 style="margin:0 0 6px;">Text Cleaner »</h3>
-        <p style="font-size:13.5px;margin:0;color:var(--muted);">Remove unnecessary extra spaces, tab characters, and duplicate blank lines automatically.</p>
-      </div>
-    </a>
-
-    <a href="voice-proofreader.html" style="text-decoration:none;color:inherit;">
-      <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);height:100%;transition:transform 0.15s, border-color 0.15s;">
-        <h3 style="margin:0 0 6px;">Voice Proofreader »</h3>
-        <p style="font-size:13.5px;margin:0;color:var(--muted);">Listen back to your writing using voice synthesis to catch awkward wording and typos easily.</p>
-      </div>
-    </a>
-
-    <a href="goal-tracker.html" style="text-decoration:none;color:inherit;">
-      <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);height:100%;transition:transform 0.15s, border-color 0.15s;">
-        <h3 style="margin:0 0 6px;">Goal Tracker »</h3>
-        <p style="font-size:13.5px;margin:0;color:var(--muted);">Set custom minimum/maximum word, character, or page limits with real-time visual progress bars.</p>
-      </div>
-    </a>
-
-  </div>
-</article>
+      <div style="padding:16px;border:1px solid var(--line);border-radius:8
