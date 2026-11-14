@@ -3,54 +3,59 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact Us – WordCounterPro</title>
-<meta name="description" content="Contact WordCounterPro with feedback, bug reports, or questions.">
-<link rel="canonical" href="https://www.YOURDOMAIN.com/contact.html">
+<title>Contact WordCounterPro</title>
+<meta name="description" content="Contact WordCounterPro with a question or suggestion, or report a bug.">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/contact.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314213d'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='700' text-anchor='middle' fill='%23f2a900' font-family='Georgia,serif'%3EW%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#14213d">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:title" content="Contact WordCounterPro">
+<meta property="og:description" content="Contact WordCounterPro with a question or suggestion, or report a bug.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://YOUR-DOMAIN.com/contact.html">
+<meta property="og:site_name" content="WordCounterPro">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/site.js"></script>
 </head>
 <body>
-<nav><div>
-  <a class="logo" href="index.html">WordCounter<b>Pro</b></a>
-  <a href="index.html">Home</a>
-  <a href="index.html#more-tools">Tools</a>
-  <a href="index.html#blog">Blog</a>
+<a class="skip" href="#main">Skip to content</a>
+<nav aria-label="Main"><div>
+  <a class="logo" href="index.html"><span>WordCounter<b>Pro</b></span><small>Every Word Counts</small></a>
+  <button id="navtoggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
+  <div class="navlinks" id="navlinks">
+    <a href="index.html">Home</a><a href="blog.html">Blog</a>
+    <div class="menu" id="moremenu"><button id="morenav" aria-haspopup="true">More ▾</button>
+      <ul><li><a href="tools.html">More tools</a></li><li><a href="index.html#how">How it works</a></li><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html?type=bug">Report a bug</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="sitemap.html">Sitemap</a></li></ul></div>
+  </div>
 </div></nav>
-<main>
-<article>
-<h1>Contact Us</h1>
-<p class="meta">We read every message.</p>
-<p>Email us at <a href="mailto:WordCounterPro@outlook.com">WordCounterPro@outlook.com</a>. We usually reply within a few business days.</p>
+<main class="wrap" id="main">
+<article class="card">
 
-<h2>Reporting a bug</h2>
-<p>The more detail you give, the faster we can fix it. Please include:</p>
-<ul>
-  <li>The page and tool you were using</li>
-  <li>What you expected to happen and what happened instead</li>
-  <li>Your browser and device (for example, Chrome on Windows)</li>
-  <li>A short sample of the text, if it's safe to share</li>
-</ul>
-<p><a href="mailto:WordCounterPro@outlook.com?subject=WordCounterPro%20bug%20report">Send a bug report</a></p>
-
-<h2>Suggesting a feature</h2>
-<p>Tell us what you're trying to do and what's getting in the way. <a href="mailto:WordCounterPro@outlook.com?subject=WordCounterPro%20feature%20idea">Send a suggestion</a></p>
-
-<h2>Privacy and legal questions</h2>
-<p>See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Use</a>, or email us at the address above.</p>
+<h1>Contact us</h1>
+<p class="lead">Questions, suggestions and bug reports are all welcome.</p>
+<p>You can email us at <a data-mailto href="#">email</a>, or use the form below. We read every message, though we can’t promise a reply to each one.</p>
+<form class="form" id="cform">
+  <label>What is this about?<select name="type"><option value="contact">General question or suggestion</option><option value="bug">Report a bug</option></select></label>
+  <label>Your name (optional)<input name="name" autocomplete="name"></label>
+  <label>Your email (so we can reply)<input name="email" type="email" autocomplete="email"></label>
+  <div id="bugextra" hidden>
+    <label>Which page or tool?<input name="page" placeholder="For example: Find &amp; replace"></label>
+    <label class="chk" style="font-weight:400"><input type="checkbox" name="tech" checked style="width:auto"> Include my browser and screen details (helps us reproduce the bug)</label>
+  </div>
+  <label>Message<textarea name="message" required placeholder="For a bug, tell us what you did, what you expected and what happened instead."></textarea></label>
+  <div><button class="solid" type="submit">Send message</button></div>
+  <p id="cstatus" role="status" class="meta"></p>
+</form>
+<p class="meta">Please don’t include private or sensitive text in bug reports.</p>
 </article>
 </main>
-<footer>
-  <div class="fl">
-    <a href="about.html">About Us</a>
-    <a href="contact.html">Contact</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Use</a>
-    <a href="sitemap.html">Sitemap</a>
-  </div>
-  <div>&copy; 2026 WordCounterPro. All rights reserved.</div>
-</footer>
+<footer><div>
+  <section><h4>WordCounterPro</h4><p>A free, private word counter that runs in your browser. &copy; <span data-year>2026</span> WordCounterPro.</p></section>
+  <section><h4>Links</h4><span class="fl"><a href="about.html">about us</a> | <a href="sitemap.html">sitemap</a> | <a href="terms.html">terms of use</a> | <a href="privacy.html">privacy policy</a> | <a href="contact.html">contact</a> | <a href="contact.html?type=bug">report a bug</a> | <a href="tools.html">more tools</a></span></section>
+</div></footer>
 </body>
 </html>

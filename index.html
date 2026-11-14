@@ -3,1244 +3,213 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WordCounterPro – Advanced Online Word & Character Counter</title>
-<meta name="description" content="Free online word counter, character counter, Flow Score analyzer, speech reader, voice typing, and document editor. Your text stays in your browser.">
+<title>Word Counter & Character Counter – WordCounterPro</title>
+<meta name="description" content="Free online word counter and character counter. Count words, characters, sentences and paragraphs as you type, with reading time, keyword density, goals and Flow Score.">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/index.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314213d'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='700' text-anchor='middle' fill='%23f2a900' font-family='Georgia,serif'%3EW%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#14213d">
-<link rel="canonical" href="https://www.YOURDOMAIN.com/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:title" content="Word Counter & Character Counter – WordCounterPro">
+<meta property="og:description" content="Free online word counter and character counter. Count words, characters, sentences and paragraphs as you type, with reading time, keyword density, goals and Flow Score.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="WordCounterPro – Free Word &amp; Character Counter">
-<meta property="og:description" content="Free online word counter, character counter, Flow Score analyzer, voice typing, and document editor.">
-<meta property="og:url" content="https://www.YOURDOMAIN.com/">
+<meta property="og:url" content="https://YOUR-DOMAIN.com/index.html">
+<meta property="og:site_name" content="WordCounterPro">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #eef1f6;
-  --panel: #ffffff;
-  --ink: #14213d;
-  --muted: #5b6785;
-  --line: #d5dbe8;
-  --accent: #f2a900;
-  --on-accent: #14213d;
-  --nav: #14213d;
-  --on-nav: #eef1f6;
-  --head: #e1e7f3;
-  --font-family: "Newsreader", Georgia, serif;
-  --font-size: 19px;
-  --read-wpm: 238;
-  --speak-wpm: 150;
-  color-scheme: light;
-}
-body.dark-theme {
-  --bg: #0e1524;
-  --panel: #172036;
-  --ink: #e8ecf6;
-  --muted: #9aa6c4;
-  --line: #2a3654;
-  --accent: #f2b933;
-  --on-accent: #14213d;
-  --nav: #0a1020;
-  --on-nav: #e8ecf6;
-  --head: #1b2742;
-  color-scheme: dark;
-}
-
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 "Instrument Sans", system-ui, sans-serif; transition: background 0.2s, color 0.2s; }
-a { color: inherit; }
-
-/* Navigation */
-nav { background: var(--nav); color: var(--on-nav); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-nav > div { max-width: 1140px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-.logo { display: grid; gap: 2px; font: 700 25px/1 "Newsreader", Georgia, serif; text-decoration: none; margin-right: auto; }
-.logo small { font: 500 11px "Instrument Sans", sans-serif; letter-spacing: .04em; opacity: .8; }
-.logo b { background: var(--accent); color: var(--on-accent); padding: 2px 6px; border-radius: 4px; margin-left: 3px; }
-nav a:not(.logo) { text-decoration: none; opacity: .85; font-size: 15px; font-weight: 500; }
-nav a:not(.logo):hover { opacity: 1; text-decoration: underline; }
-
-.wrap { max-width: 1140px; margin: 0 auto; padding: 20px 20px 40px; }
-.layout { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; }
-.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-
-/* Header Banner */
-.top { background: var(--head); border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.top .bigcount { margin: 0; font: 600 42px/1.05 "Newsreader", Georgia, serif; font-variant-numeric: tabular-nums; }
-.top .bigcount span { color: var(--muted); font-size: .62em; font-weight: 400; }
-.top p { margin: 0; color: var(--muted); font-size: 14px; max-width: 240px; text-align: right; }
-
-/* Documents bar */
-.doc-bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(0,0,0,0.03); border-bottom: 1px solid var(--line); overflow-x: auto; }
-.doc-tabs { display: flex; gap: 6px; flex: 1; overflow-x: auto; scrollbar-width: thin; }
-.doc-tab { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; }
-.doc-tab.active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; }
-.doc-tab span.close-tab { opacity: 0.6; padding: 0 2px; border-radius: 3px; }
-.doc-tab span.close-tab:hover { opacity: 1; background: rgba(0,0,0,0.15); }
-.add-doc-btn { padding: 4px 10px; font-size: 16px; font-weight: bold; line-height: 1; border: 1px dashed var(--line); }
-
-/* Main Toolbar */
-.tools { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; border-bottom: 1px solid var(--line); background: var(--panel); }
-.tools button, .tools label.btn-label { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-width: 58px; padding: 6px 6px 5px; font-size: 11px; font-weight: 500; border-radius: 6px; cursor: pointer; background: transparent; color: var(--ink); border: 1px solid transparent; text-decoration: none; }
-.tools button:hover, .tools label.btn-label:hover { background: var(--bg); border-color: var(--line); }
-.tools button.on { background: var(--accent); color: var(--on-accent); font-weight: 600; }
-.tools button.recording { background: #e63946; color: #fff; animation: pulse 1.5s infinite; }
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
-
-svg.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-button { font: 500 14px "Instrument Sans", system-ui, sans-serif; border: 1px solid transparent; background: transparent; color: var(--ink); cursor: pointer; }
-button.solid { background: var(--accent); color: var(--on-accent); padding: 8px 16px; border-radius: 6px; font-weight: 600; }
-button.solid:hover { opacity: 0.9; }
-button.outline { border-color: var(--line); padding: 7px 14px; border-radius: 6px; }
-button.outline:hover { background: var(--bg); }
-
-.menu { position: relative; }
-.menu ul { display: none; position: absolute; z-index: 50; top: 100%; left: 0; margin: 2px 0 0; padding: 4px; list-style: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; min-width: 160px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-.menu.open ul { display: block; }
-.menu li button, .menu li a { width: 100%; text-align: left; padding: 7px 10px; font-size: 13px; border-radius: 4px; display: block; text-decoration: none; color: var(--ink); }
-.menu li button:hover, .menu li a:hover { background: var(--bg); }
-
-/* Editor Text Area */
-.editor-container { position: relative; min-height: 420px; }
-textarea { display: block; width: 100%; min-height: 420px; resize: vertical; border: 0; padding: 22px; background: transparent; color: var(--ink); font-family: var(--font-family); font-size: var(--font-size); line-height: 1.65; }
-textarea:focus-visible { outline: none; box-shadow: inset 0 0 0 3px var(--accent); }
-
-/* Footer bar of Editor */
-.foot { display: flex; align-items: center; gap: 14px; padding: 12px 18px; border-top: 1px solid var(--line); flex-wrap: wrap; background: var(--panel); }
-.foot strong { font-size: 16px; font-weight: 600; }
-.goalbar { flex: 1; min-width: 140px; display: none; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
-.goalbar.show { display: flex; }
-.track { flex: 1; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
-.track i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
-
-/* Sidebar Panels */
-aside { display: grid; gap: 14px; }
-.box h2 { margin: 0; padding: 12px 16px; font: 600 17px "Newsreader", serif; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
-.row { display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; border-bottom: 1px solid var(--line); font-size: 14px; }
-.row:last-of-type { border: 0; }
-.pill { background: var(--ink); color: var(--bg); border-radius: 12px; padding: 1px 9px; font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; }
-.more { display: none; }
-.more.show { display: block; }
-.link-row { padding: 8px 16px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-.link-row button { color: var(--muted); padding: 2px 0; border: 0; font-size: 13px; font-weight: 500; }
-.link-row button:hover { color: var(--ink); text-decoration: underline; }
-
-.seg { display: flex; gap: 4px; padding: 10px 16px 0; }
-.seg button { border: 1px solid var(--line); padding: 3px 10px; font-size: 12px; border-radius: 4px; }
-.seg button.on { background: var(--accent); color: var(--on-accent); font-weight: 600; border-color: var(--accent); }
-
-ol.kw-list { list-style: none; margin: 0; padding: 8px 16px 14px; display: grid; gap: 8px; }
-ol.kw-list li { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; font-size: 13.5px; }
-ol.kw-list li i { grid-column: 1/-1; height: 4px; border-radius: 2px; background: var(--accent); }
-.empty { margin: 0; padding: 14px 16px; color: var(--muted); font-size: 13.5px; font-style: italic; }
-
-/* Flow Score Styling */
-.fscore { display: flex; align-items: baseline; gap: 10px; padding: 10px 16px 4px; }
-.fscore b { font: 600 36px/1 "Newsreader", serif; }
-.fscore span { color: var(--muted); font-size: 13px; }
-.legend { display: flex; flex-wrap: wrap; gap: 4px 8px; padding: 4px 16px 8px; font-size: 11px; color: var(--muted); }
-.legend span { padding: 1px 5px; border-radius: 3px; font-weight: 500; }
-.fview { margin: 0 16px 16px; max-height: 240px; overflow-y: auto; font: 400 15px/1.7 "Newsreader", Georgia, serif; padding: 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); }
-.cat-vs { background: rgba(147, 197, 253, 0.45); }
-.cat-s  { background: rgba(187, 247, 208, 0.45); }
-.cat-m  { background: rgba(254, 240, 138, 0.45); }
-.cat-l  { background: rgba(253, 230, 138, 0.55); }
-.cat-vl { background: rgba(254, 215, 170, 0.65); }
-.cat-ex { background: rgba(254, 202, 202, 0.75); }
-.rp-flag { border-bottom: 2px dotted #dc2626; }
-
-/* Articles / Content Sections */
-article { margin-top: 22px; padding: 26px 28px; max-width: none; }
-article h2 { margin: 0 0 12px; font: 600 28px "Newsreader", serif; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
-article p { max-width: 78ch; color: var(--muted); margin: 0 0 14px; font-size: 15px; }
-article h3 { margin: 20px 0 8px; font: 600 19px "Newsreader", serif; color: var(--ink); }
-.post { margin: 18px 0; padding-left: 12px; border-left: 3px solid var(--accent); }
-.sitemap { margin: 0; padding: 0 0 0 18px; list-style: disc; display: block; }
-.sitemap li { display: list-item; margin: 5px 0; font-size: 15px; }
-
-/* Modal Dialogs */
-dialog { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--ink); padding: 22px; width: min(460px, 92vw); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
-dialog::backdrop { background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); }
-dialog h2 { margin: 0 0 14px; font: 600 22px "Newsreader", serif; }
-dialog label { display: block; margin: 10px 0 4px; font-size: 13.5px; font-weight: 500; }
-dialog input, dialog select { font: inherit; padding: 8px 10px; width: 100%; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); margin-bottom: 8px; }
-.acts { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
-
-/* Bars graph for Activity */
-.bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; margin-top: 12px; }
-.bars div { flex: 1; text-align: center; font-size: 11px; color: var(--muted); display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
-.bars i { display: block; background: var(--accent); border-radius: 4px 4px 0 0; margin-bottom: 4px; min-height: 2px; }
-
-/* Utility / Switch */
-.sw { margin-left: auto; position: relative; width: 42px; height: 22px; display: inline-block; }
-.sw input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; width: 100%; height: 100%; z-index: 2; }
-.sw i { position: absolute; inset: 0; border-radius: 11px; background: var(--line); pointer-events: none; transition: .15s; }
-.sw i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: .15s; }
-.sw input:checked + i { background: var(--accent); }
-.sw input:checked + i::after { transform: translateX(20px); }
-
-.tip { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--line); color: var(--muted); font: 600 11px sans-serif; margin-left: 6px; position: relative; cursor: help; }
-.tip::after { content: attr(data-tip); display: none; position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%); width: 210px; padding: 7px 9px; background: var(--ink); color: var(--bg); border-radius: 6px; font: 400 12px/1.4 "Instrument Sans", sans-serif; z-index: 60; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-.tip:hover::after, .tip:focus::after { display: block; }
-.share { display: flex; gap: 5px; }
-.share a { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 5px; background: var(--ink); color: var(--bg); font: 700 12px sans-serif; text-decoration: none; }
-.share a:hover { background: var(--accent); color: var(--on-accent); }
-.new { background: var(--accent); color: var(--on-accent); font: 700 10px "Instrument Sans", sans-serif; padding: 2px 6px; border-radius: 8px; margin-left: 4px; }
-
-/* Responsive adjustments */
-body.basic aside, body.basic article, body.basic .top { display: none; }
-body.basic .layout { grid-template-columns: 1fr; }
-body.basic textarea { min-height: 75vh; }
-@media (max-width: 860px) {
-  .layout { grid-template-columns: 1fr; }
-  textarea { min-height: 300px; }
-  .top .bigcount { font-size: 32px; }
-  .top p { text-align: left; max-width: 100%; }
-}
-
-footer { background: var(--nav); color: var(--on-nav); margin-top: 40px; }
-footer > div { max-width: 1140px; margin: 0 auto; padding: 30px 20px; display: flex; gap: 40px; flex-wrap: wrap; font-size: 14px; }
-footer h4 { margin: 0 0 10px; font: 600 17px "Newsreader", serif; }
-footer a { opacity: .85; text-decoration: none; }
-footer a:hover { text-decoration: underline; opacity: 1; }
-.fl a { display: inline-block; margin: 0 4px; }
-.top h1 { margin: 0 0 4px; font: 600 14px "Instrument Sans", system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/site.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "WordCounterPro", "url": "https://YOUR-DOMAIN.com/", "description": "Free online word counter and character counter with reading time, keyword density, Flow Score, goals, find and replace, and voice tools. Runs in your browser.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript", "inLanguage": "en", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How does WordCounterPro count words?", "acceptedAnswer": {"@type": "Answer", "text": "A word is any run of letters or digits, and it may include apostrophes and hyphens inside it. So “don’t” and “well-known” each count as one word. Numbers such as 2026 count as words too."}}, {"@type": "Question", "name": "Is my text uploaded anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Counting, Flow Score, find and replace, PDF creation and every other tool run in your browser. Your text is not sent to our servers. The one exception is the optional Talk to Type feature, which uses your browser’s own speech service. See the privacy policy for details."}}, {"@type": "Question", "name": "Where are my documents saved?", "acceptedAnswer": {"@type": "Answer", "text": "With auto-save on, your documents are stored in your browser’s local storage on this device. Clearing your browser data or switching browsers or devices means they won’t be there. Download a .txt or PDF copy of anything important."}}, {"@type": "Question", "name": "How is reading time worked out?", "acceptedAnswer": {"@type": "Answer", "text": "Reading time divides your word count by a reading speed of 238 words per minute, a commonly used average for silent reading. Speaking time uses 150 words per minute and handwriting time uses 20. You can change all three in Settings."}}, {"@type": "Question", "name": "What is the Flow Score?", "acceptedAnswer": {"@type": "Answer", "text": "Flow Score looks at how much your sentence lengths vary across six length bands, and penalises long runs of similar-length sentences. A high score means a varied rhythm. It is a rough guide to readability, not a grade."}}, {"@type": "Question", "name": "What is the publisher word count?", "acceptedAnswer": {"@type": "Answer", "text": "Some publishers and editors estimate length from characters instead of counting words, using characters with spaces divided by six. It can differ from the normal word count, so it is shown as a separate figure in the Details panel."}}, {"@type": "Question", "name": "Does it check grammar or plagiarism?", "acceptedAnswer": {"@type": "Answer", "text": "No. Those checks need outside services that would have to receive your text. WordCounterPro focuses on counting, timing, keyword density and sentence rhythm."}}]}</script>
 </head>
 <body>
-
-<!-- SVG Icon Symbols -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
- <symbol id="paste" viewBox="0 0 24 24"><path d="M9 3h6v4H9zM7 5H5v16h14V5h-2"/></symbol>
- <symbol id="undo" viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5M4 12h10a6 6 0 010 8"/></symbol>
- <symbol id="redo" viewBox="0 0 24 24"><path d="M15 7l5 5-5 5M20 12H10a6 6 0 000 8"/></symbol>
- <symbol id="goal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></symbol>
- <symbol id="act" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></symbol>
- <symbol id="dl" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
- <symbol id="ul" viewBox="0 0 24 24"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"/></symbol>
- <symbol id="clr" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"/></symbol>
- <symbol id="save" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7V4M8 20v-6h8v6"/></symbol>
- <symbol id="exp" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
- <symbol id="case" viewBox="0 0 24 24"><path d="M3 18l5-12 5 12M5 14h6M15 18v-5a3 3 0 016 0v5M15 16h6"/></symbol>
- <symbol id="find" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></symbol>
- <symbol id="clean" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></symbol>
- <symbol id="print" viewBox="0 0 24 24"><path d="M6 9V4h12v5M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v6H6z"/></symbol>
- <symbol id="mic" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></symbol>
- <symbol id="speaker" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></symbol>
- <symbol id="gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
- <symbol id="bug" viewBox="0 0 24 24"><rect x="8" y="6" width="8" height="14" rx="4"/><path d="M6 13h12M4 9h16M4 17h16M10 2l-2 3M14 2l2 3"/></symbol>
+ <symbol id="i-paste" viewBox="0 0 24 24"><path d="M9 3h6v4H9zM7 5H5v16h14V5h-2"/></symbol>
+ <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 17V6M7 10l5-5 5 5M5 20h14"/></symbol>
+ <symbol id="i-find" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></symbol>
+ <symbol id="i-clean" viewBox="0 0 24 24"><path d="M5 19l9-9M13 5l1.5 3L18 9.5 14.5 11 13 14l-1.5-3L8 9.5 11.5 8zM18 15l.8 1.7L20.5 17.5 18.8 18.3 18 20l-.8-1.7-1.7-.8 1.7-.8z"/></symbol>
+ <symbol id="i-case" viewBox="0 0 24 24"><path d="M3 18l5-12 5 12M5 14h6M15 18v-5a3 3 0 016 0v5M15 16h6"/></symbol>
+ <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5M4 12h10a6 6 0 010 8"/></symbol>
+ <symbol id="i-redo" viewBox="0 0 24 24"><path d="M15 7l5 5-5 5M20 12H10a6 6 0 000 8"/></symbol>
+ <symbol id="i-speak" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zM16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/></symbol>
+ <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0012 0M12 17v4"/></symbol>
+ <symbol id="i-kbd" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M11 10h.01M15 10h.01M8 14h8"/></symbol>
+ <symbol id="i-goal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></symbol>
+ <symbol id="i-act" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></symbol>
+ <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5v-7h14v7h-2M7 14h10v6H7z"/></symbol>
+ <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+ <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zM8 4v5h7V4M8 20v-6h8v6"/></symbol>
+ <symbol id="i-exp" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+ <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol>
+ <symbol id="i-clr" viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13"/></symbol>
 </svg>
 
-<nav><div>
-  <a class="logo" href="#top"><span>WordCounter<b>Pro</b></span><small>Every Word Counts</small></a>
-  <a href="#top">Home</a>
-  <a href="#more-tools">More Tools</a>
-  <a href="#blog">Blog</a>
-  <div class="menu" id="moremenu">
-    <button id="morenav" aria-haspopup="true">More ▾</button>
-    <ul>
-      <li><a href="#how">How it works</a></li>
-      <li><a href="contact.html">Contact & Feedback</a></li>
-      <li><a href="privacy.html">Privacy Policy</a></li>
-      <li><a href="terms.html">Terms of Use</a></li>
-      <li><a href="sitemap.html">Sitemap</a></li>
-      <li><a href="about.html">About Us</a></li>
-    </ul>
+<a class="skip" href="#main">Skip to content</a>
+<nav aria-label="Main"><div>
+  <a class="logo" href="index.html"><span>WordCounter<b>Pro</b></span><small>Every Word Counts</small></a>
+  <button id="navtoggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
+  <div class="navlinks" id="navlinks">
+    <a href="index.html">Home</a><a href="blog.html">Blog</a>
+    <div class="menu" id="moremenu"><button id="morenav" aria-haspopup="true">More ▾</button>
+      <ul><li><a href="tools.html">More tools</a></li><li><a href="index.html#how">How it works</a></li><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html?type=bug">Report a bug</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="sitemap.html">Sitemap</a></li></ul></div>
   </div>
 </div></nav>
 
-<main class="wrap" id="top">
-
+<main class="wrap" id="main">
+<h1 class="pagetitle">Word Counter &amp; Character Counter</h1>
 <div class="top">
-  <h1>Free Word Counter &amp; Character Counter</h1>
-  <div class="bigcount"><span id="hw">0</span> <span>words</span> <span id="hc">0</span> <span>characters</span></div>
-  <p>Free online text analysis and counter. Your text is processed locally in your browser.</p>
+  <div class="big" aria-live="polite"><span id="hw">0</span> <span class="u">words</span> <span id="hc">0</span> <span class="u">characters</span></div>
+  <p>Type or paste below. Counting happens in your browser only.</p>
 </div>
-
 <div class="layout">
 <div>
-
 <section class="card" aria-label="Editor">
-  <!-- Multi-Document Bar -->
-  <div class="doc-bar">
-    <div class="doc-tabs" id="docTabs"></div>
-    <button class="doc-tab add-doc-btn" id="addDocBtn" title="Create new document">+</button>
+  <div class="tools" role="toolbar" aria-label="Editor tools">
+    <button id="paste"><svg class="i"><use href="#i-paste"/></svg>Paste</button>
+    <button id="upload"><svg class="i"><use href="#i-upload"/></svg>Upload</button>
+    <button id="find"><svg class="i"><use href="#i-find"/></svg>Find &amp; replace</button>
+    <button id="cleanbtn"><svg class="i"><use href="#i-clean"/></svg>Clean text</button>
+    <div class="menu" id="casemenu"><button id="casebtn" aria-haspopup="true"><svg class="i"><use href="#i-case"/></svg>Case ▾</button>
+      <ul><li><button data-case="upper">UPPERCASE</button></li><li><button data-case="lower">lowercase</button></li><li><button data-case="title">Title Case</button></li><li><button data-case="sentence">Sentence case</button></li></ul></div>
+    <span class="sep"></span>
+    <button id="undo"><svg class="i"><use href="#i-undo"/></svg>Undo</button>
+    <button id="redo"><svg class="i"><use href="#i-redo"/></svg>Redo</button>
+    <span class="sep"></span>
+    <button id="proof"><svg class="i"><use href="#i-speak"/></svg>Proof read</button>
+    <button id="talk"><svg class="i"><use href="#i-mic"/></svg>Talk to type</button>
+    <button id="typing"><svg class="i"><use href="#i-kbd"/></svg>Typing speed</button>
+    <span class="sep"></span>
+    <button id="goalbtn"><svg class="i"><use href="#i-goal"/></svg>Goal</button>
+    <button id="actbtn"><svg class="i"><use href="#i-act"/></svg>Activity</button>
+    <button id="print"><svg class="i"><use href="#i-print"/></svg>Print</button>
+    <div class="menu" id="dlmenu"><button id="dlbtn" aria-haspopup="true"><svg class="i"><use href="#i-dl"/></svg>Download ▾</button>
+      <ul><li><button id="dltxt">Text file (.txt)</button></li><li><button id="dlpdf">PDF (.pdf)</button></li></ul></div>
+    <span class="sep"></span>
+    <button id="autosave" class="on"><svg class="i"><use href="#i-save"/></svg>Auto-save on</button>
+    <button id="basic"><svg class="i"><use href="#i-exp"/></svg>Go basic</button>
+    <button id="settingsbtn"><svg class="i"><use href="#i-gear"/></svg>Settings</button>
+    <button id="clear"><svg class="i"><use href="#i-clr"/></svg>Clear</button>
   </div>
-
-  <!-- Writing Toolbar -->
-  <div class="tools" role="toolbar" aria-label="Editor toolbar">
-    <button id="pasteBtn"><svg class="i"><use href="#paste"/></svg>Paste</button>
-    <div class="menu" id="casemenu">
-      <button id="casebtn" aria-haspopup="true"><svg class="i"><use href="#case"/></svg>Case ▾</button>
-      <ul>
-        <li><button data-case="upper">UPPERCASE</button></li>
-        <li><button data-case="lower">lowercase</button></li>
-        <li><button data-case="title">Title Case</button></li>
-        <li><button data-case="sentence">Sentence case</button></li>
-      </ul>
-    </div>
-    <button id="findBtn"><svg class="i"><use href="#find"/></svg>Find/Replace</button>
-    <button id="cleanBtn"><svg class="i"><use href="#clean"/></svg>Clean Text</button>
-    <button id="undoBtn"><svg class="i"><use href="#undo"/></svg>Undo</button>
-    <button id="redoBtn"><svg class="i"><use href="#redo"/></svg>Redo</button>
-    <button id="proofReadBtn"><svg class="i"><use href="#speaker"/></svg>Read Aloud</button>
-    <button id="talkTypeBtn"><svg class="i"><use href="#mic"/></svg>Talk to Type</button>
-    <button id="goalbtn"><svg class="i"><use href="#goal"/></svg>Goal</button>
-    <button id="actbtn"><svg class="i"><use href="#act"/></svg>Activity</button>
-    <button id="printBtn"><svg class="i"><use href="#print"/></svg>Print</button>
-    <label class="btn-label" title="Upload TXT file">
-      <svg class="i"><use href="#ul"/></svg>Upload
-      <input type="file" id="uploadFile" accept=".txt" style="display:none">
-    </label>
-    <div class="menu" id="dlmenu">
-      <button id="dlbtn" aria-haspopup="true"><svg class="i"><use href="#dl"/></svg>Download ▾</button>
-      <ul>
-        <li><button id="dlTxt">as TXT file (.txt)</button></li>
-        <li><button id="dlPdf">as PDF document (.pdf)</button></li>
-      </ul>
-    </div>
-    <button id="settingsBtn"><svg class="i"><use href="#gear"/></svg>Settings</button>
-    <button id="autosave" class="on"><svg class="i"><use href="#save"/></svg>Auto-save</button>
-    <button id="basicBtn"><svg class="i"><use href="#exp"/></svg>Go basic</button>
-    <button id="clearBtn"><svg class="i"><use href="#clr"/></svg>Clear</button>
-  </div>
-
-  <label for="t" style="position:absolute;left:-9999px">Your text area</label>
-  <div class="editor-container">
-    <textarea id="t" placeholder="Start typing, talk to type, or copy and paste your document here…"></textarea>
-  </div>
-
+  <div class="docbar"><label for="docsel" class="meta">Document</label><select id="docsel"></select>
+    <button id="docnew">+ New</button><button id="docren">Rename</button><button id="docdel">Delete</button><span class="grow"></span><span id="savestat"></span></div>
+  <label for="t" style="position:absolute;left:-9999px">Your text</label>
+  <textarea id="t" placeholder="Start typing, or paste your text here…" spellcheck="true"></textarea>
   <div class="foot">
-    <strong id="fw">0 words 0 characters</strong>
-    <div class="goalbar" id="goalbar"><span id="goaltxt"></span><div class="track"><i id="goalfill"></i></div></div>
+    <strong id="fw">0 words 0 characters</strong><span id="msg" role="status"></span>
+    <div class="goalbar" id="goalbar"><span id="goaltxt"></span><div class="track" id="track"><i id="goalfill"></i><u id="goalmin"></u></div></div>
   </div>
 </section>
-
-<!-- SEO Content / Main Overview -->
-<article class="card" id="whatis">
-  <h2>What is WordCounterPro?</h2>
-  <p>WordCounterPro is a comprehensive online writing assistant designed for authors, students, journalists, and SEO professionals. In addition to instantly counting words, characters, sentences, and paragraphs, our smart editor provides real-time insights into your writing style, reading level, keyword density, and flow variety.</p>
-  <p>Whether you are drafting a 500-word blog article, meeting a strict 10,000-character university essay limit, or writing a full-length book manuscript, WordCounterPro helps you monitor your progress accurately. Everything is calculated live as you type, delete, or paste text.</p>
-
-  <h3>Key Features &amp; Tools</h3>
-  <p><strong>1. Privacy-First Design:</strong> The text you type or paste is processed in your browser. We do not store it or send it to our servers. If you use voice dictation, your browser's own speech service handles the audio. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
-  <p><strong>2. Advanced Flow Score:</strong> Analyze sentence structure across six unique length categories to ensure your prose is engaging, varied, and free of repetitive, monotonous patterns.</p>
-  <p><strong>3. Integrated Voice Tools:</strong> Use <em>Talk to Type</em> for dictating ideas hands-free via web speech recognition, and <em>Read Aloud</em> to proofread drafts with natural voice synthesis.</p>
-  <p><strong>4. Export &amp; File Support:</strong> Import plain text files (.txt) and export your work seamlessly into formatted TXT or clean PDF documents.</p>
-  <p><small>Disclaimer: Statistics and calculations are provided for guidance purposes. Always double-check exact submission guidelines for academic or official publishing requirements.</small></p>
-</article>
-
 </div>
-
-<!-- Sidebar Controls and Details -->
 <aside aria-live="polite">
-  <a class="how" href="#how" style="display:block;text-align:center;color:var(--accent);font-weight:600;text-decoration:none;">How it works »</a>
-  
-  <!-- Details Box -->
-  <div class="card box" id="detailsBox">
-    <h2>Details</h2>
-    <div class="row" data-stat="words">Words<span class="pill" id="w">0</span></div>
-    <div class="row" data-stat="chars">Characters<span class="pill" id="c">0</span></div>
-    <div class="row" data-stat="sents">Sentences<span class="pill" id="s">0</span></div>
-    <div class="row" data-stat="paras">Paragraphs<span class="pill" id="p">0</span></div>
-    <div class="row" data-stat="readlvl"><span>Reading level<span class="tip" data-tip="Estimated U.S. school grade level needed to understand the text (Flesch–Kincaid formula).">?</span></span><span class="pill" id="lvl">N/A</span></div>
-    <div class="row" data-stat="readtime"><span>Reading time<span class="tip" data-tip="Estimated silent reading time based on user speed settings.">?</span></span><span class="pill" id="rt">0 sec</span></div>
-    <div class="row" data-stat="speaktime"><span>Speaking time<span class="tip" data-tip="Estimated speech or presentation time based on speaking speed.">?</span></span><span class="pill" id="st">0 sec</span></div>
-    
-    <div class="more" id="moreStats">
-      <div class="row" data-stat="cn">Characters, no spaces<span class="pill" id="cn">0</span></div>
-      <div class="row" data-stat="uq">Unique words<span class="pill" id="uq">0</span></div>
-      <div class="row" data-stat="awl">Average word length<span class="pill" id="awl">0</span></div>
-      <div class="row" data-stat="asl">Avg sentence length (words)<span class="pill" id="asl">0</span></div>
-      <div class="row" data-stat="aslc">Avg sentence length (chars)<span class="pill" id="aslc">0</span></div>
-      <div class="row" data-stat="wpm">Typing Speed (WPM)<span class="pill" id="wpm">0</span></div>
-      <div class="row" data-stat="hwtime">Handwriting time<span class="pill" id="hwt">0 sec</span></div>
-      <div class="row" data-stat="pubwc">Publisher word count<span class="pill" id="pwc">0</span></div>
-      <div class="row" data-stat="lw">Longest word<span class="pill" id="lw">–</span></div>
-      <div class="row" data-stat="ln">Lines<span class="pill" id="ln">0</span></div>
-      <div class="row" data-stat="sy">Syllables<span class="pill" id="sy">0</span></div>
-      <div class="row" data-stat="lsent">Longest sentence<span class="pill" id="lsent">0</span></div>
-      <div class="row" data-stat="ssent">Shortest sentence<span class="pill" id="ssent">0</span></div>
-      <div class="row" data-stat="spp">Sentences per paragraph<span class="pill" id="spp">0</span></div>
-      <div class="row" data-stat="nums">Numbers count<span class="pill" id="nums">0</span></div>
-      <div class="row" data-stat="pg">Pages (500 words/page)<span class="pill" id="pg">0</span></div>
-    </div>
-    
-    <div class="link-row">
-      <button id="morebtn">More (16)</button>
-      <span class="share">
-        <a data-sh="fb" aria-label="Share on Facebook" target="_blank" rel="noopener">f</a>
-        <a data-sh="x" aria-label="Share on X" target="_blank" rel="noopener">X</a>
-        <a data-sh="li" aria-label="Share on LinkedIn" target="_blank" rel="noopener">in</a>
-        <a data-sh="rd" aria-label="Share on Reddit" target="_blank" rel="noopener">r</a>
-        <a data-sh="em" aria-label="Share by email">✉</a>
-      </span>
-    </div>
+  <a class="how" href="#how">How it works »</a>
+  <div class="card box"><h2>Details</h2><div id="details"></div>
+    <div class="link"><button id="morebtn">More</button>
+      <span class="share"><a data-sh="fb" aria-label="Share on Facebook" target="_blank" rel="noopener">f</a><a data-sh="x" aria-label="Share on X" target="_blank" rel="noopener">X</a><a data-sh="li" aria-label="Share on LinkedIn" target="_blank" rel="noopener">in</a><a data-sh="rd" aria-label="Share on Reddit" target="_blank" rel="noopener">r</a><a data-sh="em" aria-label="Share by email">✉</a></span></div>
   </div>
-
-  <!-- Flow Score Box -->
   <div class="card box">
-    <h2>Flow Score <span class="new">NEW</span><span class="tip" data-tip="Evaluates sentence length variety. Monochrome sentence patterns decrease readability.">?</span>
-      <label class="sw"><input type="checkbox" id="flowsw" aria-label="Turn Flow Score on"><i></i></label>
-    </h2>
-    <p class="empty" id="flowoff" style="text-align:center">Turn on Flow Score to analyze sentence rhythm and highlight variety.</p>
-    <div id="flowon" hidden>
-      <div class="fscore"><b id="fs">–</b><span id="fsl"></span></div>
-      <div class="legend">
-        <span class="cat-vs">v.short (1–4)</span>
-        <span class="cat-s">short (5–9)</span>
-        <span class="cat-m">med (10–17)</span>
-        <span class="cat-l">long (18–25)</span>
-        <span class="cat-vl">v.long (26–34)</span>
-        <span class="cat-ex">extra (35+)</span>
-      </div>
-      <div class="fview" id="fview"></div>
-    </div>
+    <h2 class="fl">Flow Score <span class="new">NEW</span><span class="tip" tabindex="0" role="note" aria-label="Rates how much your sentence lengths vary across six length bands." data-tip="Rates how much your sentence lengths vary across six length bands. Even, same-sized sentences read as monotonous.">?</span><label class="sw"><input type="checkbox" id="flowsw" aria-label="Turn Flow Score on"><i></i></label></h2>
+    <p class="empty" id="flowoff" style="text-align:center">Improve your writing's flow and variety using sentence highlights.</p>
+    <div id="flowon" hidden><div class="fscore"><b id="fs">–</b><span id="fsl"></span></div>
+      <div class="legend" id="legend"></div><div class="fview" id="fview"></div></div>
   </div>
-
-  <!-- Keyword Density Box -->
-  <div class="card box">
-    <h2>Keyword Density</h2>
-    <div class="seg" role="group" aria-label="Phrase length">
-      <button class="on" data-n="1">x1</button>
-      <button data-n="2">x2</button>
-      <button data-n="3">x3</button>
-    </div>
-    <ol class="kw-list" id="kw"></ol>
-    <p class="empty" id="kwe">Start typing to see your most-used keywords.</p>
-  </div>
+  <div class="card box"><h2>Keyword density</h2>
+    <div class="seg" role="group" aria-label="Phrase length"><button class="on" data-n="1" aria-label="1 word">x1</button><button data-n="2" aria-label="2 words">x2</button><button data-n="3" aria-label="3 words">x3</button></div>
+    <ol class="kw" id="kw"></ol><p class="empty" id="kwe">Start typing to see your most-used words.</p></div>
+  <div class="adslot" data-slot="sidebar" aria-label="Advertisement"><small>Advertisement</small></div>
 </aside>
 </div>
-
-<!-- Detailed SEO Articles & Supplemental Content -->
-<article class="card" id="more-tools">
-  <h2>More Writing &amp; Text Utilities</h2>
-  <p>WordCounterPro is part of a complete suite of browser-based utilities built to assist copywriters, educators, authors, and web content creators. Explore our additional tools below:</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px;">
-    
-    <a href="case-converter.html" style="text-decoration:none;color:inherit;">
-      <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);height:100%;">
-        <h3 style="margin:0 0 6px;">Case Converter »</h3>
-        <p style="font-size:13.5px;margin:0;color:var(--muted);">Quickly switch text between UPPERCASE, lowercase, Title Case, and Sentence case with a single click.</p>
-      </div>
-    </a>
-
-    <a href="text-cleaner.html" style="text-decoration:none;color:inherit;">
-      <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);height:100%;">
-        <h3 style="margin:0 0 6px;">Text Cleaner »</h3>
-        <p style="font-size:13.5px;margin:0;color:var(--muted);">Remove unnecessary extra spaces, tab characters, and duplicate blank lines automatically.</p>
-      </div>
-    </a>
-
-    <a href="voice-proofreader.html" style="text-decoration:none;color:inherit;">
-      <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);height:100%;">
-        <h3 style="margin:0 0 6px;">Voice Proofreader »</h3>
-        <p style="font-size:13.5px;margin:0;color:var(--muted);">Listen back to your writing using voice synthesis to catch awkward wording and typos easily.</p>
-      </div>
-    </a>
-
-    <a href="goal-tracker.html" style="text-decoration:none;color:inherit;">
-      <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);height:100%;">
-        <h3 style="margin:0 0 6px;">Goal Tracker »</h3>
-        <p style="font-size:13.5px;margin:0;color:var(--muted);">Set custom minimum/maximum word, character, or page limits with real-time visual progress bars.</p>
-      </div>
-    </a>
-
-  </div>
+<div class="seo">
+<article class="card" id="whatis">
+  <h2>A free word counter and character counter for writers</h2>
+  <p class="lead">Paste or type your text above and WordCounterPro shows your word count, character count, sentences and paragraphs immediately, with no sign-up.</p>
+  <p>Many writing tasks come with a number attached: a 500-word essay, a 280-character post, a 160-character meta description, a 1,200-word article for a client. This page is built for checking those numbers quickly and then going further. Keep several documents open at once, set a minimum and maximum target, see how long your piece takes to read or say out loud, and find the repeated words you lean on too often.</p>
+  <p>Everything happens in your browser. Open the page, write, and your documents stay on your device until you delete them.</p>
+  <h2 id="how">How it works</h2>
+  <h3>Writing tools</h3>
+  <p>Find &amp; replace supports match case and whole-word searches. Clean text removes extra spaces, blank lines, line breaks, HTML tags and other clutter that tends to arrive when you paste from a web page or PDF. Case changes the capitalisation of a selection or of the whole text. Upload opens a .txt file, and Download saves your work as a .txt or PDF. Print sends just your text to the printer.</p>
+  <h3>Voice tools</h3>
+  <p>Proof read speaks your text out loud, which is a reliable way to catch clumsy phrasing and missing words. Talk to type turns your speech into text. Both use features built into your browser, so availability varies by browser and device.</p>
+  <h3>Details panel</h3>
+  <p>The panel on the right tracks words, characters, sentences, paragraphs, reading level, reading time, speaking time and handwriting time. Open “More” for average sentence length in words and characters, publisher word count, unique words, syllables, longest and shortest sentences and more. In Settings you choose which rows to show and adjust the reading, speaking and handwriting speeds.</p>
+  <h3>Goals and activity</h3>
+  <p>Set a goal in words, characters, sentences or pages, with a minimum, a maximum or both. The progress bar tells you how far you have to go, when you’re inside your range and when you’ve gone over. Activity charts the words you added over the last seven days.</p>
+  <h3>Flow Score and keyword density</h3>
+  <p>Flow Score sorts every sentence into one of six length bands, from 1–5 words up to 36 or more, and colours each sentence so you can see your rhythm at a glance. Keyword density lists your ten most-used words or two- and three-word phrases, which helps you spot overused terms.</p>
+  <h2>How words and characters are counted</h2>
+  <p>Words are sequences of letters or digits, including inside-word apostrophes and hyphens. Characters include spaces and line breaks; “characters, no spaces” is in the Details panel. Sentences end at a full stop, question mark or exclamation mark followed by a space or the end of the text. Paragraphs are separated by line breaks. Because there is no single official definition, other tools may differ by a few words, especially with abbreviations, URLs and symbols.</p>
+  <h2>Common word and character limits</h2>
+  <div class="tablewrap"><table><thead><tr><th>Where</th><th>Typical limit</th></tr></thead><tbody><tr><td>X (Twitter) post, standard accounts</td><td>280 characters</td></tr><tr><td>Instagram caption</td><td>2,200 characters</td></tr><tr><td>LinkedIn post</td><td>3,000 characters</td></tr><tr><td>YouTube video title</td><td>100 characters</td></tr><tr><td>SMS text message (basic GSM characters)</td><td>160 characters per message</td></tr><tr><td>Page title (SEO)</td><td>about 50–60 characters before it may be cut off</td></tr><tr><td>Meta description (SEO)</td><td>about 150–160 characters before it may be cut off</td></tr><tr><td>Common application essay</td><td>250–650 words, depending on the prompt</td></tr></tbody></table></div><p class="meta">Platforms change these numbers from time to time, so check the current rules before you publish.</p>
 </article>
-
-<article class="card" id="how">
-  <h2>How WordCounterPro Works</h2>
-  <p>WordCounterPro runs directly inside your internet browser using standard HTML5 and JavaScript algorithms. When you paste or type text into the main box, the system tokenizes sentences, words, and characters instantaneously.</p>
-  <h3>Flesch–Kincaid Readability Formula</h3>
-  <p>Our Reading Level indicator utilizes the standardized Flesch–Kincaid Grade Level metric. By evaluating average sentence length (words per sentence) alongside average word complexity (syllables per word), the tool calculates an estimated U.S. grade level required for comprehension.</p>
-  <h3>Privacy &amp; Data Security</h3>
-  <p>Your documents and settings are saved in your own browser's local storage, and the text you write is not uploaded to our servers. Third-party services such as Google Fonts, advertising partners, and your browser's speech recognition may receive standard technical data such as your IP address, as described in our <a href="privacy.html">Privacy Policy</a>. Clearing your browser data removes your saved documents.</p>
-</article>
-
+<div class="adslot" data-slot="inarticle" aria-label="Advertisement"><small>Advertisement</small></div>
 <article class="card" id="faq">
-  <h2>Frequently Asked Questions</h2>
-  <h3>How does WordCounterPro count words?</h3>
-  <p>A word is any run of characters separated by spaces or line breaks. Hyphenated terms such as "well-known" count as one word. Different programs follow different rules, so if you are submitting to a school or publisher, confirm that its counter agrees with ours.</p>
-  <h3>Does the character count include spaces?</h3>
-  <p>The details panel shows characters both with and without spaces, so you can match whichever rule your limit uses. Social media platforms and most application forms count spaces.</p>
-  <h3>How is the reading level calculated?</h3>
-  <p>We use the Flesch&ndash;Kincaid Grade Level formula, which compares your average sentence length and your average syllables per word to estimate the U.S. school grade needed to follow the text. Shorter sentences and simpler words lower the grade.</p>
-  <h3>How are reading and speaking times estimated?</h3>
-  <p>Reading time assumes an average silent reading speed of 238 words per minute, and speaking time assumes 150 words per minute. You can change both speeds in Settings to match your own pace.</p>
-  <h3>What is Flow Score?</h3>
-  <p>Flow Score looks at how varied your sentence lengths are. Text where every sentence is about the same length can feel monotone, while a mix of short and long sentences usually reads more naturally.</p>
-  <h3>Is my text saved anywhere?</h3>
-  <p>Auto-save keeps your document in your browser's local storage on your device. We do not receive it. Clearing your browser data deletes it, so export a copy of anything important.</p>
-
-  <h3>Common word and character limits</h3>
-  <p>Limits change, so always confirm with the platform or organization. These are widely used guidelines:</p>
-  <ul>
-    <li>Common App personal essay: 650 words maximum</li>
-    <li>X (Twitter) standard post: 280 characters</li>
-    <li>Instagram caption: 2,200 characters</li>
-    <li>LinkedIn post: 3,000 characters</li>
-    <li>YouTube video title: 100 characters</li>
-    <li>SEO page title: about 60 characters</li>
-    <li>SEO meta description: about 155&ndash;160 characters</li>
-  </ul>
-  <p>Wondering how long a blog post should be? Read <a href="blog-ideal-blog-post-length-seo.html">How Long Should a Blog Post Be for SEO in 2026?</a></p>
+  <h2>Frequently asked questions</h2>
+  <details><summary>How does WordCounterPro count words?</summary><p>A word is any run of letters or digits, and it may include apostrophes and hyphens inside it. So “don’t” and “well-known” each count as one word. Numbers such as 2026 count as words too.</p></details><details><summary>Is my text uploaded anywhere?</summary><p>No. Counting, Flow Score, find and replace, PDF creation and every other tool run in your browser. Your text is not sent to our servers. The one exception is the optional Talk to Type feature, which uses your browser’s own speech service. See the privacy policy for details.</p></details><details><summary>Where are my documents saved?</summary><p>With auto-save on, your documents are stored in your browser’s local storage on this device. Clearing your browser data or switching browsers or devices means they won’t be there. Download a .txt or PDF copy of anything important.</p></details><details><summary>How is reading time worked out?</summary><p>Reading time divides your word count by a reading speed of 238 words per minute, a commonly used average for silent reading. Speaking time uses 150 words per minute and handwriting time uses 20. You can change all three in Settings.</p></details><details><summary>What is the Flow Score?</summary><p>Flow Score looks at how much your sentence lengths vary across six length bands, and penalises long runs of similar-length sentences. A high score means a varied rhythm. It is a rough guide to readability, not a grade.</p></details><details><summary>What is the publisher word count?</summary><p>Some publishers and editors estimate length from characters instead of counting words, using characters with spaces divided by six. It can differ from the normal word count, so it is shown as a separate figure in the Details panel.</p></details><details><summary>Does it check grammar or plagiarism?</summary><p>No. Those checks need outside services that would have to receive your text. WordCounterPro focuses on counting, timing, keyword density and sentence rhythm.</p></details>
 </article>
-
-<!-- Blog Section -->
-<article class="card" id="blog">
-  <h2>Writing Tips &amp; SEO Blog</h2>
-  <p>Explore our expert guides on content writing, word limits, keyword optimization, and readability scoring to improve your drafting workflow.</p>
-  
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:16px;">
-    
-    <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;">
-      <div>
-        <h3 style="margin:0 0 6px;font:600 18px 'Newsreader',serif;">How Long Should a Blog Post Be for SEO in 2026?</h3>
-        <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;">What the research says about ideal post length for Google and AI search, with word counts by content type and a way to find the right length for your keyword.</p>
-      </div>
-      <a href="blog-ideal-blog-post-length-seo.html" class="solid" style="display:inline-block;text-align:center;text-decoration:none;padding:6px 12px;font-size:13px;border-radius:6px;align-self:flex-start;">Read Article »</a>
-    </div>
-
-    <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;">
-      <div>
-        <h3 style="margin:0 0 6px;font:600 18px 'Newsreader',serif;">Cutting a Draft to a Strict Word Limit</h3>
-        <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;">Learn effective strategies for trimming filler words, redundant adjectives, and bloated paragraphs down to exact essay limits.</p>
-      </div>
-      <a href="blog-cutting-word-limits.html" class="solid" style="display:inline-block;text-align:center;text-decoration:none;padding:6px 12px;font-size:13px;border-radius:6px;align-self:flex-start;">Read Article »</a>
-    </div>
-
-    <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;">
-      <div>
-        <h3 style="margin:0 0 6px;font:600 18px 'Newsreader',serif;">Using Flow Score to Fix Monotone Writing</h3>
-        <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;">Discover how sentence length variety affects reader engagement and how to use Flow Scores to fix robotic sentence rhythm.</p>
-      </div>
-      <a href="blog-sentence-flow-rhythm.html" class="solid" style="display:inline-block;text-align:center;text-decoration:none;padding:6px 12px;font-size:13px;border-radius:6px;align-self:flex-start;">Read Article »</a>
-    </div>
-
-    <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;">
-      <div>
-        <h3 style="margin:0 0 6px;font:600 18px 'Newsreader',serif;">Avoiding Keyword Stuffing in Modern SEO</h3>
-        <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;">Understand keyword density metrics and how to optimize web copy for search engines without ruining readability.</p>
-      </div>
-      <a href="blog-avoiding-keyword-stuffing.html" class="solid" style="display:inline-block;text-align:center;text-decoration:none;padding:6px 12px;font-size:13px;border-radius:6px;align-self:flex-start;">Read Article »</a>
-    </div>
-
-    <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;">
-      <div>
-        <h3 style="margin:0 0 6px;font:600 18px 'Newsreader',serif;">Understanding Flesch–Kincaid Readability</h3>
-        <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;">A complete guide to U.S. school grade levels, syllable counts, and how readability scores impact your target audience.</p>
-      </div>
-      <a href="blog-flesch-kincaid-readability.html" class="solid" style="display:inline-block;text-align:center;text-decoration:none;padding:6px 12px;font-size:13px;border-radius:6px;align-self:flex-start;">Read Article »</a>
-    </div>
-
-    <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;">
-      <div>
-        <h3 style="margin:0 0 6px;font:600 18px 'Newsreader',serif;">Structuring Academic Essays and Research Papers</h3>
-        <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;">Tips for meeting university word counts, tracking character limits, and organizing paragraphs effectively.</p>
-      </div>
-      <a href="blog-improving-academic-essays.html" class="solid" style="display:inline-block;text-align:center;text-decoration:none;padding:6px 12px;font-size:13px;border-radius:6px;align-self:flex-start;">Read Article »</a>
-    </div>
-
-    <div style="padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;">
-      <div>
-        <h3 style="margin:0 0 6px;font:600 18px 'Newsreader',serif;">Speech Writing: Timing and Word Counts</h3>
-        <p style="font-size:13.5px;color:var(--muted);margin:0 0 12px;">How speaking speed (WPM) dictates presentation length and how to calibrate your draft for a 3-minute or 10-minute speech.</p>
-      </div>
-      <a href="blog-speech-writing-timing.html" class="solid" style="display:inline-block;text-align:center;text-decoration:none;padding:6px 12px;font-size:13px;border-radius:6px;align-self:flex-start;">Read Article »</a>
-    </div>
-
-  </div>
-</article>
-
+</div>
 </main>
-
 <footer><div>
-  <section style="flex:1;min-width:240px;">
-    <h4>WordCounterPro</h4>
-    <p>A fast, private, browser-based word counter and document editor for writers around the globe.</p>
-  </section>
-  <section style="flex:1;min-width:240px;">
-    <h4>Quick Navigation</h4>
-    <span class="fl">
-      <a href="about.html">About Us</a> | 
-      <a href="contact.html">Contact</a> | 
-      <a href="sitemap.html">Sitemap</a> | 
-      <a href="terms.html">Terms of Use</a> | 
-      <a href="privacy.html">Privacy Policy</a>
-    </span>
-  </section>
+  <section><h4>WordCounterPro</h4><p>A free, private word counter that runs in your browser. &copy; <span data-year>2026</span> WordCounterPro.</p></section>
+  <section><h4>Links</h4><span class="fl"><a href="about.html">about us</a> | <a href="sitemap.html">sitemap</a> | <a href="terms.html">terms of use</a> | <a href="privacy.html">privacy policy</a> | <a href="contact.html">contact</a> | <a href="contact.html?type=bug">report a bug</a> | <a href="tools.html">more tools</a></span></section>
 </div></footer>
 
-<!-- DIALOG MODALS -->
-<dialog id="goald">
-  <h2>Set Custom Goal Targets</h2>
-  <label for="gMetric">Metric</label>
-  <select id="gMetric">
-    <option value="words">Words</option>
-    <option value="chars">Characters</option>
-    <option value="sents">Sentences</option>
-    <option value="pages">Pages (500 w/pg)</option>
-  </select>
-  
-  <label for="gMin">Minimum Target</label>
-  <input id="gMin" type="number" min="0" placeholder="e.g. 500">
-  
-  <label for="gMax">Maximum Target (Optional limit)</label>
-  <input id="gMax" type="number" min="0" placeholder="e.g. 1000">
-  
-  <div class="acts">
-    <button id="goalclr" class="outline">Remove Goal</button>
-    <button id="goalok" class="solid">Save Goal</button>
-  </div>
-</dialog>
 
-<dialog id="findDialog">
-  <h2>Find &amp; Replace</h2>
-  <label for="findInput">Search for:</label>
-  <input id="findInput" type="text" placeholder="Word or phrase to find...">
-  
-  <label for="replaceInput">Replace with:</label>
-  <input id="replaceInput" type="text" placeholder="Replacement text...">
-  
-  <div style="display:flex;gap:12px;margin:8px 0;font-size:13px;">
-    <label style="display:inline-flex;align-items:center;gap:4px;cursor:pointer;"><input type="checkbox" id="matchCase"> Match Case</label>
-  </div>
-
-  <div class="acts">
-    <button id="findCloseBtn" class="outline">Close</button>
-    <button id="replaceAllBtn" class="solid">Replace All</button>
-  </div>
-</dialog>
-
-<dialog id="cleanDialog">
-  <h2>Clean Text Options</h2>
-  <div style="display:grid;gap:8px;font-size:14px;margin:10px 0;">
-    <label style="cursor:pointer;"><input type="checkbox" id="cExtraSpaces" checked> Remove extra spaces (consecutive spaces &gt; 1)</label>
-    <label style="cursor:pointer;"><input type="checkbox" id="cEmptyLines" checked> Remove duplicate empty lines</label>
-    <label style="cursor:pointer;"><input type="checkbox" id="cTrimLines" checked> Trim trailing spaces from line ends</label>
-  </div>
-  <div class="acts">
-    <button id="cleanCloseBtn" class="outline">Cancel</button>
-    <button id="cleanApplyBtn" class="solid">Apply Clean</button>
-  </div>
-</dialog>
-
-<dialog id="settingsDialog">
-  <h2>Editor &amp; Site Settings</h2>
-  
-  <label for="themeSelect">Theme Mode</label>
-  <select id="themeSelect">
-    <option value="light">Light Mode</option>
-    <option value="dark">Dark Mode</option>
-  </select>
-
-  <label for="fontSelect">Editor Font Family</label>
-  <select id="fontSelect">
-    <option value="serif">Newsreader (Serif)</option>
-    <option value="sans">Instrument Sans</option>
-    <option value="inter">Inter (Clean Sans)</option>
-    <option value="roboto">Roboto</option>
-    <option value="mono">Courier Prime (Monospace)</option>
-  </select>
-
-  <label for="readSpeedInput">Silent Reading Speed (WPM)</label>
-  <input id="readSpeedInput" type="number" value="238" min="50" max="1000">
-
-  <label for="speakSpeedInput">Speaking / Presentation Speed (WPM)</label>
-  <input id="speakSpeedInput" type="number" value="150" min="50" max="500">
-
-  <h3 style="font-size:15px;margin:14px 0 6px;">Customize Details Panel Rows</h3>
-  <div id="panelToggleContainer" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12.5px;max-height:160px;overflow-y:auto;border:1px solid var(--line);padding:8px;border-radius:6px;background:var(--bg);"></div>
-
-  <div class="acts">
-    <button id="settingsCloseBtn" class="solid">Done</button>
-  </div>
-</dialog>
-
-<dialog id="actd">
-  <h2>Words Written (Last 7 Days)</h2>
-  <div class="bars" id="bars"></div>
-  <div class="acts">
-    <button class="solid" id="actok">Close</button>
-  </div>
-</dialog>
-
-<script>
-const $ = id => document.getElementById(id);
-const store = {
-  get: k => { try { return localStorage.getItem(k); } catch(e) { return null; } },
-  set: (k, v) => { try { localStorage.setItem(k, v); } catch(e) {} }
-};
-
-const STOP_WORDS = new Set('the a an and or but of to in on at for with is are was were be been it its this that as by from not i you he she we they them his her our your my me so if then than too very can will just'.split(' '));
-const WRE = /[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu;
-
-let nGram = 1;
-let prevWordCount = 0;
-let isAutosaveOn = store.get('wcp-auto') !== '0';
-
-let settings = {
-  theme: store.get('wcp-theme') || 'light',
-  font: store.get('wcp-font') || 'serif',
-  readWpm: +store.get('wcp-read-wpm') || 238,
-  speakWpm: +store.get('wcp-speak-wpm') || 150,
-  hiddenStats: JSON.parse(store.get('wcp-hidden-stats') || '[]')
-};
-
-let goalConfig = JSON.parse(store.get('wcp-goal-cfg') || 'null') || {
-  metric: 'words',
-  min: +store.get('wcp-goal') || 0,
-  max: 0
-};
-
-let docs = JSON.parse(store.get('wcp-docs') || 'null');
-if(!Array.isArray(docs) || docs.length === 0) {
-  docs = [{ id: 'doc-1', name: 'Document 1', content: store.get('wcp-text') || '' }];
-}
-let activeDocId = store.get('wcp-active-doc') || docs[0].id;
-
-let sessionStartTime = null;
-let speechSynth = window.speechSynthesis;
-let speechUtterance = null;
-let isSpeaking = false;
-let speechRecognizer = null;
-let isListening = false;
-
-const tArea = $('t');
-
-function saveDocsToStore() {
-  if (isAutosaveOn) {
-    const activeDoc = docs.find(d => d.id === activeDocId);
-    if (activeDoc) activeDoc.content = tArea.value;
-    store.set('wcp-docs', JSON.stringify(docs));
-    store.set('wcp-active-doc', activeDocId);
-    store.set('wcp-text', tArea.value);
-  }
-}
-
-function renderDocTabs() {
-  const container = $('docTabs');
-  container.innerHTML = '';
-  docs.forEach((d) => {
-    const tab = document.createElement('div');
-    tab.className = 'doc-tab' + (d.id === activeDocId ? ' active' : '');
-    tab.innerHTML = `<span>${escapeHtml(d.name)}</span>`;
-    if (docs.length > 1) {
-      const closeBtn = document.createElement('span');
-      closeBtn.className = 'close-tab';
-      closeBtn.textContent = '×';
-      closeBtn.onclick = (e) => { e.stopPropagation(); deleteDocument(d.id); };
-      tab.appendChild(closeBtn);
-    }
-    tab.onclick = () => switchDocument(d.id);
-    container.appendChild(tab);
-  });
-}
-
-function switchDocument(id) {
-  const currDoc = docs.find(d => d.id === activeDocId);
-  if (currDoc) currDoc.content = tArea.value;
-  activeDocId = id;
-  const newDoc = docs.find(d => d.id === activeDocId);
-  tArea.value = newDoc ? newDoc.content : '';
-  saveDocsToStore();
-  renderDocTabs();
-  updateAnalysis(true);
-}
-
-function createNewDocument() {
-  const newId = 'doc-' + Date.now();
-  docs.push({ id: newId, name: 'Doc ' + (docs.length + 1), content: '' });
-  switchDocument(newId);
-}
-
-function deleteDocument(id) {
-  if (docs.length <= 1) return;
-  docs = docs.filter(d => d.id !== id);
-  if (activeDocId === id) activeDocId = docs[0].id;
-  saveDocsToStore();
-  renderDocTabs();
-  switchDocument(activeDocId);
-}
-
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-const countSyllables = w => {
-  w = w.toLowerCase().replace(/[^a-z]/g, '');
-  if (w.length <= 3) return w ? 1 : 0;
-  return Math.max(1, (w.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '').replace(/^y/, '').match(/[aeiouy]{1,2}/g) || []).length);
-};
-
-const formatTime = seconds => {
-  seconds = Math.round(seconds);
-  if (seconds < 60) return seconds + ' sec';
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return m + ' min' + (s ? ' ' + s + ' sec' : '');
-};
-
-function updateAnalysis(isFirstRun) {
-  const val = tArea.value;
-  const wordsArray = val.match(WRE) || [];
-  const W = wordsArray.length;
-  const C = val.length;
-  
-  const sentenceArray = (val.match(/[^.!?]+[.!?]+(?=\s|$)|[^.!?\s][^.!?]*$/g) || [])
-    .filter(s => /[\p{L}\p{N}]/u.test(s))
-    .map(s => s.trim());
-  
-  const S = sentenceArray.length;
-  const sentLengths = sentenceArray.map(s => (s.match(WRE) || []).length);
-  const paragraphCount = val.split(/\n/).filter(x => x.trim()).length;
-  
-  const setVal = (id, x) => $(id).textContent = typeof x === 'number' ? x.toLocaleString() : x;
-  
-  setVal('hw', W); setVal('hc', C); setVal('w', W); setVal('c', C); setVal('s', S); setVal('p', paragraphCount);
-  setVal('fw', `${W.toLocaleString()} words ${C.toLocaleString()} characters`);
-  setVal('rt', formatTime((W / settings.readWpm) * 60));
-  setVal('st', formatTime((W / settings.speakWpm) * 60));
-  
-  let gradeLvl = 'N/A';
-  if (W >= 5 && S > 0) {
-    const totalSyl = wordsArray.reduce((a, x) => a + countSyllables(x), 0);
-    let fk = Math.round(0.39 * (W / S) + 11.8 * (totalSyl / W) - 15.59);
-    gradeLvl = fk >= 13 ? 'College+' : 'Grade ' + Math.max(0, fk);
-  }
-  setVal('lvl', gradeLvl);
-  
-  const charNoSpaces = val.replace(/\s/g, '').length;
-  setVal('cn', charNoSpaces);
-  setVal('uq', new Set(wordsArray.map(x => x.toLowerCase())).size);
-  setVal('awl', W ? (wordsArray.join('').length / W).toFixed(1) : 0);
-  setVal('asl', S ? (W / S).toFixed(1) : 0);
-  setVal('aslc', S ? (charNoSpaces / S).toFixed(1) : 0);
-  setVal('hwt', formatTime((W / 13) * 60));
-  setVal('pwc', Math.ceil(C / 6));
-  
-  if (!sessionStartTime && W > 0) sessionStartTime = Date.now();
-  let currentWpm = 0;
-  if (sessionStartTime && W > 0) {
-    const minutesElapsed = (Date.now() - sessionStartTime) / 60000;
-    if (minutesElapsed > 0.1) currentWpm = Math.round(W / minutesElapsed);
-  }
-  setVal('wpm', currentWpm);
-
-  setVal('lw', wordsArray.reduce((a, b) => b.length > a.length ? b : a, '') || '–');
-  setVal('ln', val ? val.split('\n').length : 0);
-  setVal('sy', wordsArray.reduce((a, x) => a + countSyllables(x), 0));
-  setVal('lsent', sentLengths.length ? Math.max(...sentLengths) : 0);
-  setVal('ssent', sentLengths.length ? Math.min(...sentLengths) : 0);
-  setVal('spp', paragraphCount ? (S / paragraphCount).toFixed(1) : 0);
-  setVal('nums', (val.match(/\d+(?:[.,]\d+)*/g) || []).length);
-  setVal('pg', (W / 500).toFixed(1));
-  
-  updateFlowScore(sentenceArray, sentLengths);
-  updateKeywordDensity(wordsArray);
-  updateGoalUI(W, C, S, (W / 500));
-  
-  if (!isFirstRun) {
-    if (W > prevWordCount) addActivity(W - prevWordCount);
-    saveDocsToStore();
-  }
-  prevWordCount = W;
-}
-
-function updateFlowScore(sentenceArray, sentLengths) {
-  const isOn = $('flowsw').checked;
-  $('flowoff').hidden = isOn;
-  $('flowon').hidden = !isOn;
-  if (!isOn) return;
-  
-  const catClasses = ['cat-vs', 'cat-s', 'cat-m', 'cat-l', 'cat-vl', 'cat-ex'];
-  const categories = sentLengths.map(l => l <= 4 ? 0 : l <= 9 ? 1 : l <= 17 ? 2 : l <= 25 ? 3 : l <= 34 ? 4 : 5);
-  const repeatFlags = categories.map(() => false);
-  for (let i = 0; i < categories.length; ) {
-    let j = i;
-    while (j < categories.length && categories[j] === categories[i]) j++;
-    if (j - i >= 3) for (let k = i; k < j; k++) repeatFlags[k] = true;
-    i = j;
-  }
-  
-  const N = sentLengths.length;
-  if (N < 3) {
-    $('fs').textContent = '–';
-    $('fsl').textContent = 'Write at least 3 sentences.';
-  } else {
-    const mean = sentLengths.reduce((a, x) => a + x, 0) / N;
-    const stdDev = Math.sqrt(sentLengths.reduce((a, x) => a + (x - mean) ** 2, 0) / N);
-    const repeatsCount = repeatFlags.filter(Boolean).length;
-    let score = Math.max(0, Math.min(100, Math.round((stdDev / mean) * 200) - Math.round((40 * repeatsCount) / N)));
-    $('fs').textContent = score + '%';
-    $('fsl').textContent = score >= 70 ? 'Excellent variety' : score >= 40 ? 'Fairly even rhythm' : 'Repetitive rhythm';
-  }
-  
-  const container = $('fview');
-  container.innerHTML = '';
-  sentenceArray.forEach((sent, idx) => {
-    const span = document.createElement('span');
-    span.className = catClasses[categories[idx]] + (repeatFlags[idx] ? ' rp-flag' : '');
-    span.textContent = sent;
-    container.appendChild(span);
-    container.appendChild(document.createTextNode(' '));
-  });
-}
-
-function updateKeywordDensity(words) {
-  const cleanWords = words.map(x => x.toLowerCase());
-  const counts = {};
-  for (let i = 0; i + nGram <= cleanWords.length; i++) {
-    const phraseGroup = cleanWords.slice(i, i + nGram);
-    if (nGram === 1) {
-      if (phraseGroup[0].length < 3 || STOP_WORDS.has(phraseGroup[0])) continue;
-    } else {
-      if (phraseGroup.every(x => STOP_WORDS.has(x)) || STOP_WORDS.has(phraseGroup[0]) || STOP_WORDS.has(phraseGroup[nGram - 1])) continue;
-    }
-    const phrase = phraseGroup.join(' ');
-    counts[phrase] = (counts[phrase] || 0) + 1;
-  }
-  const sorted = Object.entries(counts).filter(e => nGram === 1 || e[1] > 1).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 10);
-  const maxVal = sorted[0] ? sorted[0][1] : 1;
-  const kwList = $('kw');
-  kwList.innerHTML = '';
-  sorted.forEach(([word, count]) => {
-    const li = document.createElement('li');
-    const pct = ((count / cleanWords.length) * 100).toFixed(1);
-    li.innerHTML = `<span>${escapeHtml(word)}</span><span>${count} · ${pct}%</span><i style="width:${(count/maxVal)*100}%"></i>`;
-    kwList.appendChild(li);
-  });
-  $('kwe').hidden = sorted.length > 0;
-  $('kwe').textContent = nGram > 1 ? 'No repeating phrases detected yet.' : 'Start typing to see your most-used keywords.';
-}
-
-function updateGoalUI(w, c, s, p) {
-  const bar = $('goalbar');
-  if (!goalConfig || (!goalConfig.min && !goalConfig.max)) { bar.classList.remove('show'); return; }
-  bar.classList.add('show');
-  let currentVal = w;
-  if (goalConfig.metric === 'chars') currentVal = c;
-  if (goalConfig.metric === 'sents') currentVal = s;
-  if (goalConfig.metric === 'pages') currentVal = parseFloat(p);
-  const target = goalConfig.min || goalConfig.max;
-  let statusText = `${currentVal.toLocaleString()} / ${target.toLocaleString()} ${goalConfig.metric}`;
-  if (goalConfig.min && currentVal >= goalConfig.min) statusText += ' – target reached!';
-  if (goalConfig.max && currentVal > goalConfig.max) statusText += ' – limit exceeded!';
-  $('goaltxt').textContent = statusText;
-  $('goalfill').style.width = Math.min(100, (currentVal / target) * 100) + '%';
-  $('goalfill').style.background = (goalConfig.max && currentVal > goalConfig.max) ? '#e63946' : 'var(--accent)';
-}
-
-const getDayKey = offset => {
-  const d = new Date(); d.setDate(d.getDate() - offset);
-  return d.toLocaleDateString('en-CA');
-};
-
-function addActivity(count) {
-  let act = {};
-  try { act = JSON.parse(store.get('wcp-act') || '{}'); } catch(e) {}
-  act[getDayKey(0)] = (act[getDayKey(0)] || 0) + count;
-  store.set('wcp-act', JSON.stringify(act));
-}
-
-function showActivityModal() {
-  let act = {};
-  try { act = JSON.parse(store.get('wcp-act') || '{}'); } catch(e) {}
-  const days = [6,5,4,3,2,1,0].map(o => [getDayKey(o), act[getDayKey(o)] || 0]);
-  const maxVal = Math.max(1, ...days.map(d => d[1]));
-  const container = $('bars');
-  container.innerHTML = '';
-  days.forEach(([dStr, val]) => {
-    const el = document.createElement('div');
-    el.innerHTML = `<span>${val}</span><i style="height:${(val/maxVal)*100}px"></i><span>${new Date(dStr + 'T12:00').toLocaleDateString(undefined, { weekday: 'short' })}</span>`;
-    container.appendChild(el);
-  });
-  $('actd').showModal();
-}
-
-function insertTextAtCursor(text) {
-  tArea.focus();
-  if (!document.execCommand('insertText', false, text)) tArea.setRangeText(text, tArea.selectionStart, tArea.selectionEnd, 'end');
-  updateAnalysis();
-}
-
-const caseTransformers = {
-  upper: s => s.toUpperCase(),
-  lower: s => s.toLowerCase(),
-  title: s => s.toLowerCase().replace(/(^|[\s(“"'-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase()),
-  sentence: s => s.toLowerCase().replace(/(^\s*|[.!?]\s+)(\p{L})/gu, (m, a, b) => a + b.toUpperCase())
-};
-
-function applySettings() {
-  document.body.classList.toggle('dark-theme', settings.theme === 'dark');
-  const fontMap = {
-    serif: '"Newsreader", Georgia, serif',
-    sans: '"Instrument Sans", system-ui, sans-serif',
-    inter: '"Inter", sans-serif',
-    roboto: '"Roboto", sans-serif',
-    mono: '"Courier Prime", monospace'
-  };
-  const extraFonts = { inter: 'Inter:wght@400;500;600', roboto: 'Roboto:wght@400;500;700', mono: 'Courier+Prime' };
-  if (extraFonts[settings.font] && !document.getElementById('font-' + settings.font)) {
-    const l = document.createElement('link'); l.id = 'font-' + settings.font; l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=' + extraFonts[settings.font] + '&display=swap';
-    document.head.appendChild(l);
-  }
-  document.documentElement.style.setProperty('--font-family', fontMap[settings.font] || fontMap.serif);
-  document.querySelectorAll('#detailsBox .row').forEach(row => {
-    const key = row.dataset.stat;
-    row.style.display = (key && settings.hiddenStats.includes(key)) ? 'none' : 'flex';
-  });
-  store.set('wcp-theme', settings.theme);
-  store.set('wcp-font', settings.font);
-  store.set('wcp-read-wpm', settings.readWpm);
-  store.set('wcp-speak-wpm', settings.speakWpm);
-  store.set('wcp-hidden-stats', JSON.stringify(settings.hiddenStats));
-  updateAnalysis(true);
-}
-
-function renderSettingsPanelOptions() {
-  const container = $('panelToggleContainer');
-  container.innerHTML = '';
-  document.querySelectorAll('#detailsBox .row').forEach(row => {
-    const key = row.dataset.stat;
-    if (!key) return;
-    const labelText = row.childNodes[0].textContent.trim();
-    const lbl = document.createElement('label');
-    lbl.style.display = 'flex'; lbl.style.alignItems = 'center'; lbl.style.gap = '4px';
-    lbl.innerHTML = `<input type="checkbox" data-statkey="${key}" ${!settings.hiddenStats.includes(key) ? 'checked' : ''}> ${escapeHtml(labelText)}`;
-    container.appendChild(lbl);
-  });
-}
-
-function initVoiceTools() {
-  $('proofReadBtn').onclick = () => {
-    if (!speechSynth) { alert('Text-to-speech not supported.'); return; }
-    if (isSpeaking) { speechSynth.cancel(); isSpeaking = false; $('proofReadBtn').classList.remove('on'); return; }
-    const txt = tArea.value.trim();
-    if (!txt) return;
-    speechUtterance = new SpeechSynthesisUtterance(txt);
-    speechUtterance.rate = settings.speakWpm / 150;
-    speechUtterance.onend = () => { isSpeaking = false; $('proofReadBtn').classList.remove('on'); };
-    speechSynth.speak(speechUtterance);
-    isSpeaking = true; $('proofReadBtn').classList.add('on');
-  };
-
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (SpeechRecognition) {
-    speechRecognizer = new SpeechRecognition();
-    speechRecognizer.continuous = true; speechRecognizer.interimResults = true;
-    speechRecognizer.onresult = (event) => {
-      let finalTranscript = '';
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) finalTranscript += event.results[i][0].transcript;
-      }
-      if (finalTranscript) insertTextAtCursor((tArea.value ? ' ' : '') + finalTranscript);
-    };
-    speechRecognizer.onerror = () => stopDictation();
-    speechRecognizer.onend = () => { if (isListening) stopDictation(); };
-  }
-
-  $('talkTypeBtn').onclick = () => {
-    if (!speechRecognizer) { alert('Voice dictation not supported.'); return; }
-    if (isListening) stopDictation(); else startDictation();
-  };
-}
-
-function startDictation() { if (speechRecognizer) { speechRecognizer.start(); isListening = true; $('talkTypeBtn').classList.add('recording'); } }
-function stopDictation() { if (speechRecognizer) { speechRecognizer.stop(); isListening = false; $('talkTypeBtn').classList.remove('recording'); } }
-
-tArea.addEventListener('input', () => updateAnalysis());
-
-$('pasteBtn').onclick = async () => {
-  try { insertTextAtCursor(await navigator.clipboard.readText()); }
-  catch(e) { tArea.focus(); alert('Press Ctrl+V to paste.'); }
-};
-
-$('casebtn').onclick = () => $('casemenu').classList.toggle('open');
-document.querySelectorAll('[data-case]').forEach(btn => {
-  btn.onclick = () => {
-    $('casemenu').classList.remove('open'); tArea.focus();
-    const hasSelection = tArea.selectionStart !== tArea.selectionEnd;
-    if (!hasSelection) tArea.select();
-    const sel = tArea.value.slice(tArea.selectionStart, tArea.selectionEnd);
-    insertTextAtCursor(caseTransformers[btn.dataset.case](sel));
-  };
-});
-
-document.addEventListener('click', e => {
-  document.querySelectorAll('.menu.open').forEach(m => { if (!m.contains(e.target)) m.classList.remove('open'); });
-});
-
-$('morenav').onclick = () => $('moremenu').classList.toggle('open');
-$('moremenu').addEventListener('click', e => { if (e.target.closest('a')) $('moremenu').classList.remove('open'); });
-
-$('undoBtn').onclick = () => { tArea.focus(); document.execCommand('undo'); updateAnalysis(); };
-$('redoBtn').onclick = () => { tArea.focus(); document.execCommand('redo'); updateAnalysis(); };
-
-$('findBtn').onclick = () => $('findDialog').showModal();
-$('findCloseBtn').onclick = () => $('findDialog').close();
-$('replaceAllBtn').onclick = () => {
-  const query = $('findInput').value, rep = $('replaceInput').value;
-  if (!query) return;
-  const regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), $('matchCase').checked ? 'g' : 'gi');
-  tArea.value = tArea.value.replace(regex, rep);
-  $('findDialog').close(); updateAnalysis();
-};
-
-$('cleanBtn').onclick = () => $('cleanDialog').showModal();
-$('cleanCloseBtn').onclick = () => $('cleanDialog').close();
-$('cleanApplyBtn').onclick = () => {
-  let val = tArea.value;
-  if ($('cExtraSpaces').checked) val = val.replace(/[ \t]+/g, ' ');
-  if ($('cEmptyLines').checked) val = val.replace(/\n\s*\n/g, '\n\n');
-  if ($('cTrimLines').checked) val = val.split('\n').map(l => l.trimEnd()).join('\n');
-  tArea.value = val; $('cleanDialog').close(); updateAnalysis();
-};
-
-$('printBtn').onclick = () => window.print();
-
-$('uploadFile').onchange = e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = evt => { tArea.value = evt.target.result; updateAnalysis(); };
-  reader.readAsText(file);
-};
-
-$('dlbtn').onclick = () => $('dlmenu').classList.toggle('open');
-$('dlTxt').onclick = () => {
-  $('dlmenu').classList.remove('open');
-  const blob = new Blob([tArea.value], { type: 'text/plain;charset=utf-8' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'wordcounterpro-doc.txt'; a.click();
-  URL.revokeObjectURL(a.href);
-};
-
-function loadPdfLib() {
-  return new Promise((resolve, reject) => {
-    if (typeof html2pdf !== 'undefined') return resolve();
-    const sc = document.createElement('script');
-    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
-    sc.onload = resolve; sc.onerror = reject;
-    document.head.appendChild(sc);
-  });
-}
-
-$('dlPdf').onclick = () => {
-  $('dlmenu').classList.remove('open');
-  loadPdfLib().then(() => {
-    const element = document.createElement('div');
-    element.style.padding = '30px'; element.style.fontFamily = 'serif'; element.style.fontSize = '14pt'; element.style.whiteSpace = 'pre-wrap';
-    element.textContent = tArea.value;
-    html2pdf().set({ margin: 1, filename: 'wordcounterpro-document.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }).from(element).save();
-  }).catch(() => alert('Could not load the PDF engine. Check your connection and try again.'));
-};
-
-$('settingsBtn').onclick = () => {
-  $('themeSelect').value = settings.theme;
-  $('fontSelect').value = settings.font;
-  $('readSpeedInput').value = settings.readWpm;
-  $('speakSpeedInput').value = settings.speakWpm;
-  renderSettingsPanelOptions();
-  $('settingsDialog').showModal();
-};
-
-$('settingsCloseBtn').onclick = () => {
-  settings.theme = $('themeSelect').value;
-  settings.font = $('fontSelect').value;
-  settings.readWpm = parseInt($('readSpeedInput').value) || 238;
-  settings.speakWpm = parseInt($('speakSpeedInput').value) || 150;
-  const hidden = [];
-  document.querySelectorAll('#panelToggleContainer input').forEach(input => { if (!input.checked) hidden.push(input.dataset.statkey); });
-  settings.hiddenStats = hidden;
-  applySettings();
-  $('settingsDialog').close();
-};
-
-$('goalbtn').onclick = () => {
-  $('gMetric').value = goalConfig.metric || 'words';
-  $('gMin').value = goalConfig.min || '';
-  $('gMax').value = goalConfig.max || '';
-  $('goald').showModal();
-};
-
-$('goalok').onclick = () => {
-  goalConfig = { metric: $('gMetric').value, min: parseInt($('gMin').value) || 0, max: parseInt($('gMax').value) || 0 };
-  store.set('wcp-goal-cfg', JSON.stringify(goalConfig));
-  $('goald').close(); updateAnalysis(true);
-};
-
-$('goalclr').onclick = () => {
-  goalConfig = { metric: 'words', min: 0, max: 0 };
-  store.set('wcp-goal-cfg', JSON.stringify(goalConfig));
-  $('goald').close(); updateAnalysis(true);
-};
-
-$('actbtn').onclick = showActivityModal;
-$('actok').onclick = () => $('actd').close();
-
-const updateAutosaveUI = () => {
-  $('autosave').classList.toggle('on', isAutosaveOn);
-  $('autosave').lastChild.textContent = 'Auto-save ' + (isAutosaveOn ? 'on' : 'off');
-};
-
-$('autosave').onclick = () => {
-  isAutosaveOn = !isAutosaveOn;
-  store.set('wcp-auto', isAutosaveOn ? '1' : '0');
-  saveDocsToStore();
-  updateAutosaveUI();
-};
-
-$('basicBtn').onclick = () => {
-  const isBasic = document.body.classList.toggle('basic');
-  $('basicBtn').lastChild.textContent = isBasic ? 'Full view' : 'Go basic';
-  store.set('wcp-basic', isBasic ? '1' : '0');
-};
-
-$('clearBtn').onclick = () => {
-  if (tArea.value && !confirm('Clear all text?')) return;
-  tArea.value = ''; prevWordCount = 0; sessionStartTime = null;
-  updateAnalysis(true); saveDocsToStore(); tArea.focus();
-};
-
-$('morebtn').onclick = () => {
-  const m = $('moreStats');
-  m.classList.toggle('show');
-  $('morebtn').textContent = m.classList.contains('show') ? 'Fewer details' : 'More (16)';
-};
-
-document.querySelectorAll('.seg button').forEach(b => {
-  b.onclick = () => {
-    nGram = +b.dataset.n;
-    document.querySelectorAll('.seg button').forEach(x => x.classList.toggle('on', x === b));
-    updateAnalysis(true);
-  };
-});
-
-$('flowsw').onchange = () => { store.set('wcp-flow', $('flowsw').checked ? '1' : '0'); updateAnalysis(true); };
-$('addDocBtn').onclick = createNewDocument;
-
-const shareUrl = encodeURIComponent(location.href), shareTitle = encodeURIComponent(document.title);
-const shareLinks = {
-  fb: 'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl,
-  x: 'https://twitter.com/intent/tweet?url=' + shareUrl + '&text=' + shareTitle,
-  li: 'https://www.linkedin.com/sharing/share-offsite/?url=' + shareUrl,
-  rd: 'https://www.reddit.com/submit?url=' + shareUrl + '&title=' + shareTitle,
-  em: 'mailto:?subject=' + shareTitle + '&body=' + shareUrl
-};
-document.querySelectorAll('[data-sh]').forEach(a => a.href = shareLinks[a.dataset.sh]);
-
-applySettings();
-renderDocTabs();
-const activeDoc = docs.find(d => d.id === activeDocId);
-if (activeDoc) tArea.value = activeDoc.content;
-
-$('flowsw').checked = store.get('wcp-flow') === '1';
-updateAutosaveUI();
-initVoiceTools();
-updateAnalysis(true);
-if (store.get('wcp-basic') === '1') $('basicBtn').click();
-</script>
+<dialog id="goald"><h2>Writing goal</h2>
+  <label for="gtype">Count by</label>
+  <select id="gtype"><option value="words">Words</option><option value="chars">Characters</option><option value="sentences">Sentences</option><option value="pages">Pages</option></select>
+  <div class="two"><div><label for="gmin">Minimum</label><input id="gmin" type="number" min="0" step="any" placeholder="optional"></div>
+  <div><label for="gmax">Maximum</label><input id="gmax" type="number" min="0" step="any" placeholder="optional"></div></div>
+  <p class="hint">Set one or both. A page is counted using your “words per page” setting.</p>
+  <div class="acts"><button class="line" id="goalcancel">Cancel</button><button class="line" id="goalclr">Remove goal</button><button class="solid" id="goalok">Set goal</button></div></dialog>
+
+<dialog id="actd"><h2>Words written, last 7 days</h2><div class="bars" id="bars"></div>
+  <div class="acts"><button class="solid" id="actok">Close</button></div></dialog>
+
+<dialog id="named"><h2>Rename document</h2><label for="namein">Name</label><input id="namein" maxlength="60">
+  <div class="acts"><button class="solid" id="nameok">Save</button></div></dialog>
+
+<dialog id="frd" aria-label="Find and replace"><h2>Find &amp; replace</h2>
+  <label for="frq">Find</label><input id="frq" autocomplete="off">
+  <label for="frr">Replace with</label><input id="frr" autocomplete="off">
+  <label class="chk"><input type="checkbox" id="frc"> Match case</label>
+  <label class="chk"><input type="checkbox" id="frw"> Whole word</label>
+  <p class="hint" id="frinfo" aria-live="polite"></p>
+  <div class="acts"><button class="line" id="frprev">Previous</button><button class="line" id="frnext">Next</button><button class="line" id="frone">Replace</button><button class="solid" id="frall">Replace all</button><button class="line" id="frclose">Close</button></div></dialog>
+
+<dialog id="clean"><h2>Clean text</h2><p class="hint" id="cleanscope"></p>
+  <label class="chk"><input type="checkbox" id="cl-spaces" checked> Collapse repeated spaces</label>
+  <label class="chk"><input type="checkbox" id="cl-trim" checked> Trim spaces at the start and end of lines</label>
+  <label class="chk"><input type="checkbox" id="cl-blank"> Remove blank lines</label>
+  <label class="chk"><input type="checkbox" id="cl-join"> Remove all line breaks (join into one paragraph)</label>
+  <label class="chk"><input type="checkbox" id="cl-quotes"> Straighten curly quotes, dashes and ellipses</label>
+  <label class="chk"><input type="checkbox" id="cl-tags"> Remove HTML tags</label>
+  <label class="chk"><input type="checkbox" id="cl-dupes"> Remove duplicate lines</label>
+  <label class="chk"><input type="checkbox" id="cl-emoji"> Remove emoji</label>
+  <div class="acts"><button class="line" onclick="document.getElementById('clean').close()">Cancel</button><button class="solid" id="cleanok">Clean</button></div></dialog>
+
+<dialog id="ttd" class="wide"><h2>Typing speed test</h2>
+  <p class="hint" style="margin:0 0 10px">Type the passage below. Your timer starts with your first key. Pasting is turned off.</p>
+  <div class="ttp" id="ttp" aria-live="off"></div>
+  <label for="ttin">Your typing</label><textarea id="ttin" rows="3" style="width:100%;font:inherit;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+  <div class="ttstats"><span><b id="ttwpm">0</b> WPM</span><span><b id="ttacc">100%</b> accuracy</span><span><b id="ttsec">0s</b> time</span></div>
+  <p class="hint" id="ttdone" hidden>Finished. WPM counts only correctly typed characters (5 characters = 1 word).</p>
+  <div class="acts"><button class="line" id="ttagain">New passage</button><button class="solid" id="ttclose">Close</button></div></dialog>
+
+<dialog id="setd" class="wide"><h2>Settings</h2>
+  <div class="two"><div><label for="settheme">Appearance</label><select id="settheme"><option value="auto">Match my device</option><option value="light">Light</option><option value="dark">Dark mode</option></select></div>
+  <div><label for="setfont">Editor font</label><select id="setfont"><option value="serif">Newsreader (serif)</option><option value="sans">Instrument Sans</option><option value="georgia">Georgia</option><option value="verdana">Verdana</option><option value="arial">Arial</option><option value="mono">Monospace</option></select></div></div>
+  <label for="setsize">Editor text size <span id="sizeout"></span></label><input id="setsize" type="range" min="14" max="30" step="1">
+  <div class="two"><div><label for="setread">Reading speed (words/min)</label><input id="setread" type="number" min="50" max="1000"></div>
+  <div><label for="setspeak">Speaking speed (words/min)</label><input id="setspeak" type="number" min="50" max="400"></div>
+  <div><label for="sethand">Handwriting speed (words/min)</label><input id="sethand" type="number" min="5" max="100"></div>
+  <div><label for="setpage">Words per page</label><input id="setpage" type="number" min="100" max="2000"></div></div>
+  <label class="chk"><input type="checkbox" id="setvoice"> Talk to type: understand “period”, “comma”, “new line”</label>
+  <label style="margin-top:14px">Show in the Details panel</label><div class="setgrid" id="setdetails"></div>
+  <div class="acts"><button class="line" id="setreset">Reset to defaults</button><button class="solid" id="setok">Done</button></div></dialog>
+
+<div id="printarea"><h1 id="ptitle"></h1><div id="pbody"></div></div>
+<input type="file" id="file" accept=".txt,.text,.md,text/plain" hidden>
+
+<script src="assets/app.js"></script>
 </body>
 </html>

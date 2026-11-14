@@ -3,53 +3,55 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>About Us – WordCounterPro</title>
-<meta name="description" content="Who builds WordCounterPro and why it exists.">
-<link rel="canonical" href="https://www.YOURDOMAIN.com/about.html">
+<title>About WordCounterPro</title>
+<meta name="description" content="WordCounterPro is a free, private word counter built for writers, students and editors. Learn what it does, how it works and how it is funded.">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/about.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314213d'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='700' text-anchor='middle' fill='%23f2a900' font-family='Georgia,serif'%3EW%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#14213d">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:title" content="About WordCounterPro">
+<meta property="og:description" content="WordCounterPro is a free, private word counter built for writers, students and editors. Learn what it does, how it works and how it is funded.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://YOUR-DOMAIN.com/about.html">
+<meta property="og:site_name" content="WordCounterPro">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/site.js"></script>
 </head>
 <body>
-<nav><div>
-  <a class="logo" href="index.html">WordCounter<b>Pro</b></a>
-  <a href="index.html">Home</a>
-  <a href="index.html#more-tools">Tools</a>
-  <a href="index.html#blog">Blog</a>
+<a class="skip" href="#main">Skip to content</a>
+<nav aria-label="Main"><div>
+  <a class="logo" href="index.html"><span>WordCounter<b>Pro</b></span><small>Every Word Counts</small></a>
+  <button id="navtoggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
+  <div class="navlinks" id="navlinks">
+    <a href="index.html">Home</a><a href="blog.html">Blog</a>
+    <div class="menu" id="moremenu"><button id="morenav" aria-haspopup="true">More ▾</button>
+      <ul><li><a href="tools.html">More tools</a></li><li><a href="index.html#how">How it works</a></li><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html?type=bug">Report a bug</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="sitemap.html">Sitemap</a></li></ul></div>
+  </div>
 </div></nav>
-<main>
-<article>
+<main class="wrap" id="main">
+<article class="card">
+
 <h1>About WordCounterPro</h1>
-<p class="meta">A free, private word counter and writing toolkit.</p>
-<p>WordCounterPro started with a simple frustration: most word counters are cluttered, slow, or want you to sign up before they'll count a paragraph. We built a cleaner one that opens instantly and works the way writers expect.</p>
-
-<h2>What you can do here</h2>
-<p>Count words, characters, sentences, and paragraphs as you type. See your reading level, estimated reading and speaking time, and your most-used keywords. Check sentence rhythm with Flow Score, set word-count goals, dictate with voice typing, and listen to your draft read aloud to catch awkward phrasing. Separate tools handle case conversion and text cleanup, and our <a href="index.html#blog">writing guides</a> cover word limits, readability, and structure.</p>
-
-<h2>Privacy by design</h2>
-<p>Your text is processed in your browser and isn't sent to our servers. There are no accounts and no sign-ups. Read the details in our <a href="privacy.html">Privacy Policy</a>.</p>
-
-<h2>Who's behind it</h2>
-<p>WordCounterPro is built and maintained by Kent Williams, an independent developer and writer. Kent designs, codes and updates every tool on the site, and writes the guides in the <a href="index.html#blog">blog</a>.</p>
-
+<p class="lead">WordCounterPro is a free writing tool that shows you the numbers behind your text while you type.</p>
+<h2>Why it exists</h2>
+<p>People check word counts constantly: students against essay limits, marketers against character limits, editors against a brief. Most counters do the basic job and stop. We wanted one place that also handles the tasks that come next, such as tidying pasted text, setting a target range, hearing your draft read aloud and checking whether your sentences all sound the same.</p>
+<h2>Private by design</h2>
+<p>Counting and analysis run in your browser. Your writing is not uploaded to our servers, and there are no accounts. Saved documents live in your browser’s local storage on your own device, and you can delete them at any time.</p>
+<h2>What it does not do</h2>
+<p>WordCounterPro counts, estimates and highlights. It does not check grammar, spelling or plagiarism, because those need outside services that would have to receive your text. Reading level, reading time and Flow Score are estimates, and counts can differ slightly from other tools because there is no single official definition of a word.</p>
 <h2>How the site is funded</h2>
-<p>The site is free to use and supported by advertising. Ads never change how the tools count or analyze your text.</p>
-
+<p>The tool is free to use. To cover hosting and development time, the site may show advertising from Google AdSense. Ads never read your text. See our <a href="privacy.html">privacy policy</a> for how advertising cookies work and how to opt out of personalised ads.</p>
 <h2>Get in touch</h2>
-<p>Found a bug or have an idea? See our <a href="contact.html">Contact page</a> or email <a href="mailto:WordCounterPro@outlook.com">WordCounterPro@outlook.com</a>.</p>
+<p>Questions, ideas and bug reports are welcome on the <a href="contact.html">contact page</a>.</p>
 </article>
 </main>
-<footer>
-  <div class="fl">
-    <a href="about.html">About Us</a>
-    <a href="contact.html">Contact</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Use</a>
-    <a href="sitemap.html">Sitemap</a>
-  </div>
-  <div>&copy; 2026 WordCounterPro. All rights reserved.</div>
-</footer>
+<footer><div>
+  <section><h4>WordCounterPro</h4><p>A free, private word counter that runs in your browser. &copy; <span data-year>2026</span> WordCounterPro.</p></section>
+  <section><h4>Links</h4><span class="fl"><a href="about.html">about us</a> | <a href="sitemap.html">sitemap</a> | <a href="terms.html">terms of use</a> | <a href="privacy.html">privacy policy</a> | <a href="contact.html">contact</a> | <a href="contact.html?type=bug">report a bug</a> | <a href="tools.html">more tools</a></span></section>
+</div></footer>
 </body>
 </html>
